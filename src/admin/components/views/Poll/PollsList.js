@@ -1,12 +1,12 @@
 import { Col, Row } from "react-bootstrap";
 import { PollsListTable } from "../../PollsList/PollsListTable";
-import { Http } from '../../../../api';
 import { useEffect } from "react";
+import { getPolls } from "../../../../api/polls";
 
 export function PollsList(props) {
 
     useEffect(() => {
-        Http.get('orders').then(console.log);
+        getPolls().then(({ data }) => console.log(data));
     }, []);
 
     return (
