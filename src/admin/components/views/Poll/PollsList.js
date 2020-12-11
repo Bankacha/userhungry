@@ -2,11 +2,19 @@ import { Col, Row } from "react-bootstrap";
 import { PollsListTable } from "../../PollsList/PollsListTable";
 import { useEffect } from "react";
 import { getPolls } from "../../../../api/polls";
+import { useSelector, useDispatch } from 'react-redux';
+import { setPolls } from '../../../../store/actions/pollsAction'
+
+
 
 export function PollsList(props) {
 
+    
+    const dispatch = useDispatch();
+    
+
     useEffect(() => {
-        getPolls().then(({ data }) => console.log(data));
+        getPolls().then(({ data }) => dispatch(setPolls(data)));
     }, []);
 
     return (
@@ -14,7 +22,7 @@ export function PollsList(props) {
             <Col>
                 <Row className='mb-5'>
                     <Col>
-                        <h3>Polls</h3>
+                        <h2 className='text-center'>Polls</h2>
                     </Col>
                 </Row>
 

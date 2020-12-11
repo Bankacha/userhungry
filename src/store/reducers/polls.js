@@ -1,8 +1,16 @@
-const initialState = [];
+const initialState = {
+    polls: []
+};
 
 const pollsReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'GET_POLLS':
-            return {state: action.payload}
+            return {...state, polls: action.payload}
+        
+        default:
+            return state
     }
+    
 }
+
+export default pollsReducer;

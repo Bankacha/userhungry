@@ -4,10 +4,10 @@ import { AdminLayout } from './admin/layout/AdminLayout';
 import { PublicLayout } from './public/layout/PublicLayout';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {getPolls} from './api/polls'
+
 
 function App() {
-  console.log(getPolls())
+
   return (
     <BrowserRouter >
       <Switch>

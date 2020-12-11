@@ -1,34 +1,40 @@
 import { Table } from "react-bootstrap";
+import { useSelector } from 'react-redux';
+import { IoIosEye } from "react-icons/io";
+import {PollPreview} from '../views/Poll/PollPreview';
+import {Link} from 'react-router-dom'
+import {Http} from '../../../api/api'
+
 
 export function PollsListTable() {
+
+    const polls = useSelector(p => p.polls.polls)
+
     return (
         <Table striped bordered hover variant="dark">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
+                    <th>Poll name</th>
+                    <th>Is active?</th>
+                    <th>Created</th>
+                    <th style={{width: '30px'}}>View</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td colSpan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                {
+                    polls.map((p, i) => {
+                        return (
+                            <tr key={i}>
+                                <td>{i + 1}</td>
+                                <td>{p.label}</td>
+                                <td>{p.active === true ? 'active' : 'no longer active'}</td>
+                                <td>{p.created.split('T')[0]}</td>
+                                <td><Link to={`polls/${p.id}`}><IoIosEye size='1.5em' type='button'/></Link></td>
+                            </tr>
+                        )
+                    })
+                }
             </tbody>
         </Table>
     )

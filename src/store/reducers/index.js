@@ -1,4 +1,4 @@
-import { pollsReducer} from './polls';
+import pollsReducer from './polls';
 import {combineReducers} from 'redux';
 
 const allReducers = combineReducers({
