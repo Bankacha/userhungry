@@ -21,9 +21,8 @@ export function AdminLayout(props) {
                 <Switch>
                     {/* Be careful with ordering the Route components: */}
                     <Route path={`${path}/polls/create`} component={PollsCreate}></Route>
-                    <Route path={`${path}/polls/:id`} component={PollPreview}></Route>
+                    <Route path={`${path}/polls/:pollId`} component={PollPreview}></Route>
                     <Route path={`${path}/polls`} component={PollsList}></Route>
-
 
                     <Route exact path={`${path}`} component={AdminDashboard}></Route>
                 </Switch>

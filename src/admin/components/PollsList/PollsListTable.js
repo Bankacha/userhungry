@@ -1,9 +1,7 @@
 import { Table } from "react-bootstrap";
 import { useSelector } from 'react-redux';
 import { IoIosEye } from "react-icons/io";
-import {PollPreview} from '../views/Poll/PollPreview';
 import {Link} from 'react-router-dom'
-import {Http} from '../../../api/api'
 
 
 export function PollsListTable() {

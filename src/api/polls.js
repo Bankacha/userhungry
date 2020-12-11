@@ -1,7 +1,11 @@
 import { Http } from './api';
 
 export function getPolls() {
-    return Http.get('/orders');
+    return Http.get('/polls');
+}
+
+export function getPoll(id) {
+    return Http.get(`/polls/${id}`);
 }
 
 export function createPoll(createPollData) {
