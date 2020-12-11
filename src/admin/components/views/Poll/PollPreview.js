@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Card, Button } from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
 import { getPoll } from '../../../../api/polls';
+import { RestaurantsList } from '../../PollPreview/RestaurantsList';
+
 
 export function PollPreview(props) {
 
@@ -12,7 +14,7 @@ export function PollPreview(props) {
     useEffect(() => {
 
         getPoll(pollId).then((response) => {
-            // Uncoment next line to see poll object structure
+            // Uncomment next line to see poll object structure
             // console.log(response.data);
             setPoll(response.data);
         });
@@ -23,16 +25,21 @@ export function PollPreview(props) {
         <div>
             {
                 poll ? (
-                    <Card>
-                        <Card.Header className='text-center' as="h5">{poll.label}</Card.Header>
-                        <Card.Body>
-                            <Card.Title style={{ marginBottom: '40px' }}>Status: {poll.active === true ? 'active' : 'no longer active'}</Card.Title>
-                            <Card.Text style={{ marginBottom: '40px' }}>
-                                {poll.id}
-                            </Card.Text>
-                            <Button variant="primary">{poll.active === true ? 'deactivate' : 'make it active'}</Button>
-                        </Card.Body>
-                    </Card>
+                    <div>
+                        <Card>
+                            <Card.Header className='text-center' as="h5">{poll.label}</Card.Header>
+                            <Card.Body>
+                                <Card.Title style={{ marginBottom: '40px' }}>Status: {poll.active === true ? 'active' : 'no longer active'}</Card.Title>
+                                <Card.Text style={{ marginBottom: '40px' }}>
+                                    {poll.id}
+                                </Card.Text>
+                                <Button variant="primary">{poll.active === true ? 'deactivate' : 'make it active'}</Button>
+                            </Card.Body>
+                        </Card>
+
+                        <RestaurantsList restaurants={poll.restaurants} votes={poll.votes}></RestaurantsList>
+
+                    </div>
                 ) : ''
             }
         </div>
