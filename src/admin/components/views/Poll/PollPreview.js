@@ -10,7 +10,13 @@ export function PollPreview(props) {
     const [poll, setPoll] = useState(null);
 
     useEffect(() => {
-        getPoll(pollId).then((response) => setPoll(response.data));
+
+        getPoll(pollId).then((response) => {
+            // Uncoment next line to see poll object structure
+            // console.log(response.data);
+            setPoll(response.data);
+        });
+
     }, []);
 
     return (
