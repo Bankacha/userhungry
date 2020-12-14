@@ -3,7 +3,7 @@ import { Card, Button } from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
 import { getPoll } from '../../../../api/polls';
 import { RestaurantsList } from '../../PollPreview/RestaurantsList';
-
+import { PlaceOrder } from '../../Order/PlaceAnOrder';
 
 export function PollPreview(props) {
 
@@ -33,10 +33,9 @@ export function PollPreview(props) {
                                 <Card.Text style={{ marginBottom: '40px' }}>
                                     {poll.id}
                                 </Card.Text>
-                                <Button variant="primary">{poll.active === true ? 'deactivate' : 'make it active'}</Button>
-                            </Card.Body>
+                                <PlaceOrder poll={poll}></PlaceOrder>
+                                </Card.Body>
                         </Card>
-
                         <RestaurantsList restaurants={poll.restaurants} votes={poll.votes}></RestaurantsList>
 
                     </div>
