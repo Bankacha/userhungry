@@ -9,6 +9,9 @@ const pollsReducer = (state = initialState, action) => {
         
         default:
             return state
+
+        case 'DELETE_POLL':
+            return {...state, polls: state.polls.filter( p => p.id !== action.payload)}
     }
     
 }
