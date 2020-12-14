@@ -4,3 +4,10 @@ export const setPolls = (polls) => {
         payload: polls
     }
 }
+
+export const deletePoll = (id) => {
+    return {
+        type: 'DELETE_POLL',
+        payload: id
+    }
+}
