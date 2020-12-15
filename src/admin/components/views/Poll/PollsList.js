@@ -1,4 +1,5 @@
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Button } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 import { PollsListTable } from "../../PollsList/PollsListTable";
 import { useEffect } from "react";
 import { getPolls } from "../../../../api/polls";
@@ -23,7 +24,7 @@ export function PollsList(props) {
                         <h2 className='text-center'>Polls</h2>
                     </Col>
                 </Row>
-
+                <Link to='polls/create'><Button className='mb-3' variant='dark' style={{width: '100%'}}>Create New</Button></Link>
                 <PollsListTable></PollsListTable>
             </Col>
         </Row>
