@@ -12,6 +12,12 @@ export function pollDelete(id) {
     return Http.delete(`/polls/${id}`);
 }
 
-export function createPoll(createPollData) {
-    throw new Error('Method is not implemented.');
+export function createPoll(label, restList) {
+    return Http.post('/polls', {
+        "label": label,
+        "restaurants": restList})
+    .then(r => console.log(r.data))
+        .catch(function (error) {
+            console.log(error);
+        });
 }

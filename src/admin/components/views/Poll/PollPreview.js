@@ -26,7 +26,7 @@ export function PollPreview(props) {
             {
                 poll ? (
                     <div>
-                        <Card>
+                        <Card className="bg-dark text-white">
                             <Card.Header className='text-center' as="h5">{poll.label}</Card.Header>
                             <Card.Body>
                                 <Card.Title style={{ marginBottom: '40px' }}>Status: {poll.active === true ? 'active' : 'no longer active'}</Card.Title>
