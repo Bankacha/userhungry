@@ -9,5 +9,5 @@ export function postOrder(id, input) {
 }
 
 export function getOrders() {
-    return Http.get('/orders').then(r=>console.log(r.data))
+    return Http.get('/orders')
 }
