@@ -51,9 +51,6 @@ export function PollsCreate(props) {
         console.log(getPolls().then(r => console.log(r.data)))
     }
 
-
-    const listForSelected = selectedRestaurants.length ? selectedRestaurants : [];
-
     return (
         <Form>
             <Form.Group controlId="exampleForm.ControlInput1">
@@ -85,7 +82,7 @@ export function PollsCreate(props) {
                     </Col>
                     <Col className='offset-1 md-3'>
                         {
-                            listForSelected.map((r, i) => {
+                            selectedRestaurants.map((r, i) => {
                                 return (
                                     <Row key={i}>
                                         <Col className=' mb-1 mt-1'>{r.name}</Col>
