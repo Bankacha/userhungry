@@ -45,7 +45,7 @@ export function PollsCreate(props) {
             <Form.Group controlId="exampleForm.ControlSelect1">
                 <Row>
                     <Col className='offset-1 md-3'>
-                        <Form.Label className='mt-3 mb-5'><strong>Click on restaurant to make a WishList -></strong></Form.Label>
+                        <Form.Label className='mt-3 mb-5'><strong>Click on restaurant to make a WishList &gt;</strong></Form.Label>
 
                     </Col>
                     <Col className=' md-3'>
