@@ -1,81 +1,105 @@
 import { useEffect, useState } from 'react';
-import { Form, Table, Row, Col } from 'react-bootstrap';
+import { Form, Row, Col, Button } from 'react-bootstrap';
 import { getRestaurants } from '../../../../api/restaurants'
 import '../../../../styles/pollCreate.css'
-import { useForm } from "react-hook-form";
+import { createPoll } from '../../../../api/polls'
+import { getPolls } from '../../../../api/polls'
 
 
 export function PollsCreate(props) {
 
 
-    const { register, handleSubmit} = useForm();
-    const onSubmit = data => console.log(data);
+    // const { register, handleSubmit} = useForm();
+    // const onSubmit = data => console.log(data);
 
     const [restaurants, setRestaurants] = useState([]);
     const [selectedRestaurants, setSelectedRestaurants] = useState([]);
-
+    const [label, setLabel] = useState('')
 
     useEffect(() => {
-        getRestaurants().then(r => setRestaurants(r.data))
+        getRestaurants().then(r => setRestaurants(r.data));
+        console.log(getPolls().then(r=>console.log(r.data)))
+        
     }, [])
 
     const restSelect = (r) => {
         setSelectedRestaurants([...selectedRestaurants, r]);
         setRestaurants([...restaurants.filter(rest => rest.id !== r.id)])
+    
     }
 
-    console.log(restaurants)
+    const selectedRestIDs = () => {
+        let list = []
+     if(selectedRestaurants.length > 0) {
+         for(let rest of selectedRestaurants) {
+            list.push(rest.id)
+         }
+         return list
+     }   
+    }
+
+    const IdList = selectedRestIDs()
+
+    console.log(selectedRestIDs())
+    
+    const create = () => {
+        createPoll(label, IdList).then(r => console.log(r.data))
+        .catch(function (error) {
+            console.log(error);
+        });
+        console.log(getPolls().then(r=>console.log(r.data)))
+    }
+
 
     const listForSelected = selectedRestaurants.length ? selectedRestaurants : [];
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form>
             <Form.Group controlId="exampleForm.ControlInput1">
-                <Form.Label>Poll Label</Form.Label>
-                <Form.Control ref={register} type="string" placeholder="Poll Name" />
+                <Form.Label>Enter Poll Label</Form.Label>
+                <Form.Control onChange={ e => setLabel(e.target.value)} type="string" placeholder="Poll Name" />
             </Form.Group>
             <Form.Group controlId="exampleForm.ControlSelect1">
                 <Row>
-                    <Col className='offset-2 md-3'>
-                        <Form.Label className='mt-3 mb-5'><strong>Click on chosen restaurant to make a WishList -></strong></Form.Label>
+                    <Col className='offset-1 md-3'>
+                        <Form.Label className='mt-3 mb-5'><strong>Click on restaurant to make a WishList -></strong></Form.Label>
 
                     </Col>
-                    <Col className='md-3'>
+                    <Col className=' md-3'>
                         <Form.Label className='mt-3 mb-5'><strong>Wishlist</strong></Form.Label>
                      </Col>
                 </Row>
 
-            <Table>
-                <tbody>
                     <Row>
-                        <Col className='offset-2 md-3'>
+                        <Col className='offset-1 md-3'>
                             {
                                 restaurants.map((r, i) => {
                                     return (
-                                        <tr key={i}>
-                                            <td onClick={() => restSelect(r)}>{r.name}</td>
-                                        </tr>
+                                        <Row key={i}>
+                                            <Col className=' mb-1 mt-1' onClick={() => restSelect(r)}>{r.name}</Col>
+                                        </Row>
                                     )
                                 })
                             }
                         </Col>
-                        <Col className='md-3'>
+                        <Col className='offset-1 md-3'>
                             {
                                 listForSelected.map((r, i) => {
                                     return (
-                                        <tr key={i}>
-                                            <td>{r.name}</td>
-                                        </tr>
+                                        <Row key={i}>
+                                            <Col className=' mb-1 mt-1'>{r.name}</Col>
+                                        </Row>
                                     )
                                 })
                             }
                         </Col>
+                        <Col className='md-2'>
+                        {
+                            selectedRestaurants.length ? <Button onClick={() => create()} type='submit' variant="success" className=''>CREATE</Button> : ''
+                        }
+                        </Col>
                     </Row>
 
-
-
-                </tbody>
-            </Table>
             </Form.Group>
         </Form >
     )
