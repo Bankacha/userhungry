@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
 import { getPoll } from '../../../../api/polls';
+import { PlaceOrder } from '../../PollPreview/PlaceAnOrder';
 import { RestaurantsList } from '../../PollPreview/RestaurantsList';
-import { PlaceOrder } from '../../Order/PlaceAnOrder';
 
 export function PollPreview(props) {
 
