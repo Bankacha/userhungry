@@ -18,8 +18,6 @@ export function PollsCreate(props) {
 
     useEffect(() => {
         getRestaurants().then(r => setRestaurants(r.data));
-        console.log(getPolls().then(r => console.log(r.data)))
-
     }, [])
 
     // CREATING SECOND PARAMETER FOR CREATE REQUEST 
