@@ -16,8 +16,5 @@ export function createPoll(label, restList) {
     return Http.post('/polls', {
         "label": label,
         "restaurants": restList})
-    .then(r => console.log(r.data))
-        .catch(function (error) {
-            console.log(error);
-        });
+    
 }
