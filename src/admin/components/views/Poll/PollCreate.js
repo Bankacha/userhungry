@@ -28,22 +28,10 @@ export function PollsCreate(props) {
         setRestaurants([...restaurants.filter(rest => rest.id !== r.id)])
     }
 
-    const selectedRestIDs = () => {
-        let list = []
-        if (selectedRestaurants.length > 0) {
-            for (let rest of selectedRestaurants) {
-                list.push(rest.id)
-            }
-            return list
-        }
-    }
-
-    const IdList = selectedRestIDs()
-    console.log(selectedRestIDs())
-
-
     // CREATE REQUEST
     const create = () => {
+        const IdList = selectedRestaurants.map(r => r.id);
+
         createPoll(label, IdList).then(r => console.log(r.data))
             .catch(function (error) {
                 console.log(error);
@@ -93,7 +81,7 @@ export function PollsCreate(props) {
                     </Col>
                     <Col className='md-2'>
                         {
-                            selectedRestaurants.length ? <Button onClick={() => create()} type='submit' variant="success" className=''>CREATE</Button> : ''
+                            selectedRestaurants.length ? <Button onClick={() => create()} type="button" variant="success" className=''>CREATE</Button> : ''
                         }
                     </Col>
                 </Row>
