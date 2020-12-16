@@ -3,14 +3,11 @@ import { Form, Row, Col, Button } from 'react-bootstrap';
 import { getRestaurants } from '../../../../api/restaurants'
 import '../../../../styles/pollCreate.css'
 import { createPoll } from '../../../../api/polls'
-import { getPolls } from '../../../../api/polls'
+import { useHistory } from 'react-router-dom';
 
 
 export function PollsCreate(props) {
-
-
-    // const { register, handleSubmit} = useForm();
-    // const onSubmit = data => console.log(data);
+    const history = useHistory();
 
     const [restaurants, setRestaurants] = useState([]);
     const [selectedRestaurants, setSelectedRestaurants] = useState([]);
@@ -30,11 +27,13 @@ export function PollsCreate(props) {
     const create = () => {
         const IdList = selectedRestaurants.map(r => r.id);
 
-        createPoll(label, IdList).then(r => console.log(r.data))
+        createPoll(label, IdList)
+            .then(r => {
+               history.push(`/admin/polls/${r.data.id}`);
+            })
             .catch(function (error) {
                 console.log(error);
             });
-        console.log(getPolls().then(r => console.log(r.data)))
     }
 
     return (
