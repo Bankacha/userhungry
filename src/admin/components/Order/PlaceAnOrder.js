@@ -1,17 +1,18 @@
 import { Accordion, Form, Card, Button } from 'react-bootstrap'
 import { IoIosCheckmark } from "react-icons/io";
-import { postOrder, getOrders } from '../../../api/orders'
+import { postOrder } from '../../../api/orders'
 import { useForm } from "react-hook-form";
 
 
 
 export function PlaceOrder(props) {
 
-    const { register, handleSubmit, watch, errors } = useForm();
+    const { register, handleSubmit} = useForm();
     const onSubmit = data => {
  
-        postOrder(winner.id, data.name);
+        postOrder(winner.id, data.name).then(r => console.log(r.data));
         document.getElementById("myForm").reset();
+        alert('Order created successfully!')
     };
 
 

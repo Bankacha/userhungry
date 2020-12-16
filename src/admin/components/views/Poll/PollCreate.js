@@ -3,13 +3,12 @@ import { Form, Table, Row, Col } from 'react-bootstrap';
 import { getRestaurants } from '../../../../api/restaurants'
 import '../../../../styles/pollCreate.css'
 import { useForm } from "react-hook-form";
-import { Button } from 'bootstrap';
 
 
 export function PollsCreate(props) {
 
 
-    const { register, handleSubmit, watch, errors } = useForm();
+    const { register, handleSubmit} = useForm();
     const onSubmit = data => console.log(data);
 
     const [restaurants, setRestaurants] = useState([]);
