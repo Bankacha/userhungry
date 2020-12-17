@@ -14,6 +14,7 @@ export function PollsCreate(props) {
     const [restaurants, setRestaurants] = useState([]);
     const [selectedRestaurants, setSelectedRestaurants] = useState([]);
     const [label, setLabel] = useState('')
+    const [hovered, setHovered] = useState(-1)
 
     useEffect(() => {
         getRestaurants().then(r => setRestaurants(r.data));
@@ -44,6 +45,9 @@ export function PollsCreate(props) {
         setRestaurants([...restaurants, r]);
         setSelectedRestaurants([...selectedRestaurants.filter(rest => rest.id !== r.id)])
     }
+
+
+
 
     return (
         <Form>
@@ -81,8 +85,13 @@ export function PollsCreate(props) {
                         {
                             selectedRestaurants.map((r, i) => {
                                 return (
-                                    <Row key={i} className="justify-content-between shadow-sm bg-light my-4 p-2 rounded">
-                                        <Col onClick={() => deleteFromWishlist(r)}>{r.name} <IoIosClose size='1.5em'></IoIosClose></Col>
+                                    <Row onMouseLeave={()=>setHovered(-1)} onMouseOver={() => setHovered(i)} key={i} className="justify-content-between shadow-sm bg-light my-4 p-2 rounded">
+                                        <Col onClick={() => deleteFromWishlist(r)}>
+                                            {r.name}
+                                            {
+                                                hovered === i ? <IoIosClose size='1.5em'></IoIosClose> : ''
+                                            }
+                                             </Col>
                                     </Row>
                                 )
                             })
@@ -90,7 +99,7 @@ export function PollsCreate(props) {
                     </Col>
                     <Col className='md-2'>
                         {
-                            selectedRestaurants.length ? <IoIosCreate onClick={() => create()} type="button" variant="success" size='3.7em' className='createBtn'/> : ''
+                            selectedRestaurants.length ? <IoIosCreate onClick={() => create()} type="button" variant="success" size='3.7em' className='createBtn' /> : ''
                         }
                     </Col>
                 </Row>
