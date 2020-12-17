@@ -5,9 +5,10 @@ import '../../../../styles/pollCreate.css'
 import { createPoll } from '../../../../api/polls'
 import { useHistory } from 'react-router-dom';
 import { IoIosArrowForward } from 'react-icons/io';
-
+import { IoIosClose } from "react-icons/io";
 
 export function PollsCreate(props) {
+
     const history = useHistory();
 
     const [restaurants, setRestaurants] = useState([]);
@@ -35,6 +36,13 @@ export function PollsCreate(props) {
             .catch(function (error) {
                 console.log(error);
             });
+    }
+
+    // x button function
+
+    const deleteFromWishlist = (r) => {
+        setRestaurants([...restaurants, r]);
+        setSelectedRestaurants([...selectedRestaurants.filter(rest => rest.id !== r.id)])
     }
 
     return (
@@ -74,7 +82,7 @@ export function PollsCreate(props) {
                             selectedRestaurants.map((r, i) => {
                                 return (
                                     <Row key={i} className="justify-content-between shadow-sm bg-light my-4 p-2 rounded">
-                                        <Col className=' mb-1 mt-1'>{r.name}</Col>
+                                        <Col>{r.name}  <IoIosClose onClick={() => deleteFromWishlist(r)} size='1.5em'></IoIosClose></Col>
                                     </Row>
                                 )
                             })
