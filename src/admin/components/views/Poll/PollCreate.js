@@ -4,6 +4,7 @@ import { getRestaurants } from '../../../../api/restaurants'
 import '../../../../styles/pollCreate.css'
 import { createPoll } from '../../../../api/polls'
 import { useHistory } from 'react-router-dom';
+import { IoIosArrowForward } from 'react-icons/io';
 
 
 export function PollsCreate(props) {
@@ -29,7 +30,7 @@ export function PollsCreate(props) {
 
         createPoll(label, IdList)
             .then(r => {
-               history.push(`/admin/polls/${r.data.id}`);
+                history.push(`/admin/polls/${r.data.id}`);
             })
             .catch(function (error) {
                 console.log(error);
@@ -58,8 +59,11 @@ export function PollsCreate(props) {
                         {
                             restaurants.map((r, i) => {
                                 return (
-                                    <Row key={i}>
-                                        <Col className=' mb-1 mt-1' onClick={() => restSelect(r)}>{r.name}</Col>
+                                    <Row key={i} onClick={() => restSelect(r)} className="justify-content-between shadow-sm bg-light my-4 p-2 rounded">
+                                        <Col md={10} className='mb-1 mt-1' >{r.name}</Col>
+                                        <Col md={2}>
+                                            <IoIosArrowForward />
+                                        </Col>
                                     </Row>
                                 )
                             })
@@ -69,7 +73,7 @@ export function PollsCreate(props) {
                         {
                             selectedRestaurants.map((r, i) => {
                                 return (
-                                    <Row key={i}>
+                                    <Row key={i} className="justify-content-between shadow-sm bg-light my-4 p-2 rounded">
                                         <Col className=' mb-1 mt-1'>{r.name}</Col>
                                     </Row>
                                 )
