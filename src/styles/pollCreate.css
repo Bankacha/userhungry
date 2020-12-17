@@ -3,3 +3,9 @@
   right: 30px;
   top: 10px;
 }
+
+.createBtn {
+  position: relative;
+  right: -70px;
+  top: 12px;
+}

@@ -5,7 +5,7 @@ import '../../../../styles/pollCreate.css'
 import { createPoll } from '../../../../api/polls'
 import { useHistory } from 'react-router-dom';
 import { IoIosArrowForward } from 'react-icons/io';
-import { IoIosClose } from "react-icons/io";
+import { IoIosClose, IoIosCreate } from "react-icons/io";
 
 export function PollsCreate(props) {
 
@@ -69,7 +69,7 @@ export function PollsCreate(props) {
                                 return (
                                     <Row key={i} onClick={() => restSelect(r)} className="justify-content-between shadow-sm bg-light my-4 p-2 rounded">
                                         <Col md={10} className='mb-1 mt-1' >{r.name}</Col>
-                                        <Col md={2}>
+                                        <Col md={2} className='p-0 text-right'>
                                             <IoIosArrowForward />
                                         </Col>
                                     </Row>
@@ -82,7 +82,7 @@ export function PollsCreate(props) {
                             selectedRestaurants.map((r, i) => {
                                 return (
                                     <Row key={i} className="justify-content-between shadow-sm bg-light my-4 p-2 rounded">
-                                        <Col>{r.name}  <IoIosClose onClick={() => deleteFromWishlist(r)} size='1.5em'></IoIosClose></Col>
+                                        <Col onClick={() => deleteFromWishlist(r)}>{r.name} <IoIosClose size='1.5em'></IoIosClose></Col>
                                     </Row>
                                 )
                             })
@@ -90,7 +90,7 @@ export function PollsCreate(props) {
                     </Col>
                     <Col className='md-2'>
                         {
-                            selectedRestaurants.length ? <Button onClick={() => create()} type="button" variant="success" className=''>CREATE</Button> : ''
+                            selectedRestaurants.length ? <IoIosCreate onClick={() => create()} type="button" variant="success" size='3.7em' className='createBtn'/> : ''
                         }
                     </Col>
                 </Row>
