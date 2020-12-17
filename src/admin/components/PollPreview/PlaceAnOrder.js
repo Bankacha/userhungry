@@ -2,18 +2,22 @@ import { Accordion, Form, Card, Button } from 'react-bootstrap'
 import { IoIosCheckmark } from "react-icons/io";
 import { postOrder } from '../../../api/orders'
 import { useForm } from "react-hook-form";
+import { useState } from 'react';
 
 
 
 export function PlaceOrder(props) {
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
     const onSubmit = data => {
 
         postOrder(winner.id, data.name).then(r => console.log(r.data));
         alert('Order created successfully!')
+
+        reset()
     };
 
+    // const [ name , setName] = useState('')
 
     const winnerRestaurant = () => {
         const votes = props.poll.votes.map(v => v.restaurantId)
