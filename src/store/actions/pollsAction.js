@@ -11,3 +11,10 @@ export const deletePoll = (id) => {
         payload: id
     }
 }
+
+export const getPollId = (id) => {
+    return {
+        type: 'GET_POLL_ID',
+        payload: id
+    }
+}
