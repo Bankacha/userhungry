@@ -15,8 +15,6 @@ export function PublicLayout(props) {
             <Container>
                 <Switch>
                     <Route path={`${path}polls/:pollId/vote`} component={Vote}></Route>
-                </Switch>
-                <Switch>
                     <Route path={`${path}polls/:pollId`} component={PollVote}></Route>
                 </Switch>
             </Container>
