@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import { getPoll } from '../../../api/polls';
 import { Card, Button } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
-import {postVote} from '../../../api/polls';
+import { postVote } from '../../../api/polls';
 
 export function Vote() {
 
     const [poll, setPoll] = useState(null);
-    const [selectedId, setSelectedId] = useState(null)
+    const [selectedId, setSelectedId] = useState(null);
+    const [isSending, setIsSending] = useState(false);
 
     const { pollId } = useParams();
 
@@ -18,14 +19,25 @@ export function Vote() {
     }, [])
 
     const vote = () => {
-        if(selectedId) {
-            postVote(pollId , selectedId)
-            .then( r => {
-                console.log('you voted successfully')
-            })
-        } else {
-            console.log('not selected')
+        if (!isSending) {
+            if (selectedId) {
+                setIsSending(true)
+
+                postVote(pollId, selectedId)
+                    .then(r => {
+                        setIsSending(false)
+                        console.log('you voted successfully')
+                    })
+                    .catch((err) => {
+                        setIsSending(false);
+                        console.error('error while voting')
+                    })
+            } else {
+                alert('Restaurant not selected')
+                console.log('not selected')
+            }
         }
+
     }
 
 
@@ -37,7 +49,7 @@ export function Vote() {
                     <Card.Body>
                         <Card.Title style={{ marginBottom: '40px' }}>Status: {poll.active === true ? 'Active' : 'No longer active'}</Card.Title>
                         <Card.Text style={{ marginBottom: '40px' }}>
-                            {poll.label} 
+                            {poll.label}
                         </Card.Text>
                         <ul>
                             {
@@ -54,7 +66,7 @@ export function Vote() {
                                 })
                             }
                         </ul>
-                        <Button onClick={()=> vote()} className='w-100 mt-4' variant='success'>Vote</Button>
+                        <Button onClick={() => vote()} className='w-100 mt-4' variant='success'>Vote</Button>
                     </Card.Body>
                 </Card>
             </div>
