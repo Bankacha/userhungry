@@ -15,6 +15,10 @@ export function pollDelete(id) {
 export function createPoll(label, restList) {
     return Http.post('/polls', {
         "label": label,
-        "restaurants": restList})
-    
+        "restaurants": restList
+    })
+}
+
+export function postVote(pollId, restaurantId) {
+    return Http.post(`/polls/${pollId}/vote`, { restaurantId })
 }

@@ -1,16 +1,11 @@
 import { useParams } from "react-router-dom"
 import {Card , Button} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux';
-import {getPollId} from '../../../store/actions/pollsAction'
 
 export function PollVote() {
 
     const { pollId } = useParams();
 
-    const dispatch = useDispatch()
-
-    dispatch(getPollId(pollId))
 
     return (
         <div>
