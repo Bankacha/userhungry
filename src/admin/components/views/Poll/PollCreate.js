@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import { getRestaurants } from '../../../../api/restaurants'
-import '../../../../styles/pollCreate.css'
 import { createPoll } from '../../../../api/polls'
 import { useHistory } from 'react-router-dom';
-import { IoIosArrowForward } from 'react-icons/io';
-import { IoIosClose, IoIosCreate } from "react-icons/io";
+import { IoIosCreate } from "react-icons/io";
+import { RestaurantsList } from '../../PollCreate/RestaurantsList';
+
+import '../../../../styles/pollCreate.css'
 
 export function PollsCreate(props) {
 
@@ -14,7 +15,6 @@ export function PollsCreate(props) {
     const [restaurants, setRestaurants] = useState([]);
     const [selectedRestaurants, setSelectedRestaurants] = useState([]);
     const [label, setLabel] = useState('')
-    const [hovered, setHovered] = useState(-1)
 
     useEffect(() => {
         getRestaurants().then(r => setRestaurants(r.data));
@@ -46,65 +46,29 @@ export function PollsCreate(props) {
         setSelectedRestaurants([...selectedRestaurants.filter(rest => rest.id !== r.id)])
     }
 
-
-
-
     return (
-        <Form>
-            <Form.Group controlId="exampleForm.ControlInput1">
-                <Form.Label>Enter Poll Label</Form.Label>
-                <Form.Control onChange={e => setLabel(e.target.value)} type="string" placeholder="Poll Name" />
-            </Form.Group>
-            <Form.Group controlId="exampleForm.ControlSelect1">
-                <Row>
-                    <Col className='offset-1 md-3'>
-                        <Form.Label className='mt-3 mb-5'><strong>Click on restaurant to make a WishList &gt;</strong></Form.Label>
+        <div>
+            <Row className="justify-content-around shadow-sm row p-4 rounded bg-white">
+                <Col md={12}>
+                    <Form>
+                        <Form.Group controlId="exampleForm.ControlInput1">
+                            <Form.Label>Enter Poll Label</Form.Label>
+                            <Form.Control onChange={e => setLabel(e.target.value)} type="string" placeholder="Poll Name" />
+                        </Form.Group>
+                    </Form >
+                </Col>
 
-                    </Col>
-                    <Col className=' md-3'>
-                        <Form.Label className='mt-3 mb-5'><strong>Wishlist</strong></Form.Label>
-                    </Col>
-                </Row>
+                <Col className='md-3'>
+                    <RestaurantsList type='add' onItemClicked={(r) => restSelect(r)} title="Select restaurants" restaurants={restaurants} />
+                </Col>
+                <Col className='md-3'>
+                    <RestaurantsList type='delete' title="Click on some to remove" restaurants={selectedRestaurants} onItemClicked={(r) => deleteFromWishlist(r)} />
+                </Col>
 
-                <Row>
-                    <Col className='offset-1 md-3'>
-                        {
-                            restaurants.map((r, i) => {
-                                return (
-                                    <Row key={i} onClick={() => restSelect(r)} className="justify-content-between shadow-sm bg-light my-4 p-2 rounded">
-                                        <Col md={10} className='mb-1 mt-1' >{r.name}</Col>
-                                        <Col md={2} className='p-0 text-right'>
-                                            <IoIosArrowForward />
-                                        </Col>
-                                    </Row>
-                                )
-                            })
-                        }
-                    </Col>
-                    <Col className='offset-1 md-3'>
-                        {
-                            selectedRestaurants.map((r, i) => {
-                                return (
-                                    <Row onMouseLeave={()=>setHovered(-1)} onMouseOver={() => setHovered(i)} key={i} className="justify-content-between shadow-sm bg-light my-4 p-2 rounded">
-                                        <Col onClick={() => deleteFromWishlist(r)}>
-                                            {r.name}
-                                            {
-                                                hovered === i ? <IoIosClose size='1.5em'></IoIosClose> : ''
-                                            }
-                                             </Col>
-                                    </Row>
-                                )
-                            })
-                        }
-                    </Col>
-                    <Col className='md-2'>
-                        {
-                            selectedRestaurants.length ? <IoIosCreate onClick={() => create()} type="button" variant="success" size='3.7em' className='createBtn' /> : ''
-                        }
-                    </Col>
-                </Row>
-
-            </Form.Group>
-        </Form >
+                <Col md={12} className="mt-4">
+                    <Button disabled={!selectedRestaurants.length} onClick={() => create()} variant="success" className="w-100"><IoIosCreate /> Create</Button>
+                </Col>
+            </Row>
+        </div>
     )
 }
