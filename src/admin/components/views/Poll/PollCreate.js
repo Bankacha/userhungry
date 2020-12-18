@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Form, Row, Col } from 'react-bootstrap';
 import { getRestaurants } from '../../../../api/restaurants'
 import '../../../../styles/pollCreate.css'
 import { createPoll } from '../../../../api/polls'
