@@ -3,12 +3,16 @@ import { getPoll } from '../../../api/polls';
 import { Card, Button } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
 import { postVote } from '../../../api/polls';
+import { useHistory } from 'react-router-dom';
+import { getRestaurants } from '../../../api/restaurants'
 
 export function Vote() {
 
     const [poll, setPoll] = useState(null);
     const [selectedId, setSelectedId] = useState(null);
     const [isSending, setIsSending] = useState(false);
+
+    const history = useHistory();
 
     const { pollId } = useParams();
 
@@ -27,6 +31,7 @@ export function Vote() {
                     .then(r => {
                         setIsSending(false)
                         console.log('you voted successfully')
+                        history.push(`./result`)
                     })
                     .catch((err) => {
                         setIsSending(false);

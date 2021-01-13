@@ -14,6 +14,7 @@ export function RestaurantsList(props) {
         return count;
     }
 
+    console.log(props, props.restaurants)
 
     return (
         <div>
