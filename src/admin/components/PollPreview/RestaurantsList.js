@@ -18,7 +18,7 @@ export function RestaurantsList(props) {
 
     return (
         <div>
-            <h3 className='my-4'>Restaurants</h3>
+            <h4 className='my-4'>Restaurants</h4>
             <ListGroup>
                 {
                     props.restaurants.map((r, i) => {

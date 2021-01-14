@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
 
-export function Results () {
+export function Results() {
 
     const { pollId } = useParams()
 
-    const [restaurants , setRestaurants] = useState([])
+    const [restaurants, setRestaurants] = useState([])
     const [votes, setVotes] = useState([])
 
     useEffect(() => {
@@ -21,7 +21,10 @@ export function Results () {
     console.log(restaurants)
 
     return (
-        <RestaurantsList votes={votes} restaurants={restaurants}></RestaurantsList>
+        <div>
+            <h2 className='text-center'>You can see current results below</h2>
+            <RestaurantsList votes={votes} restaurants={restaurants}></RestaurantsList>
+        </div>
     )
 
 }

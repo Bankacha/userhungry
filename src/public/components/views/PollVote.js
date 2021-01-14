@@ -18,7 +18,7 @@ export function PollVote() {
                     <Card.Text>
                         You can vote between few restaurants and pick your favorite one! Click below!
                     </Card.Text>
-                    <Link to={`vote`}><Button variant="secondary">Go vote</Button></Link>
+                    <Link to={`${pollId}/vote`}><Button variant="secondary">Go vote</Button></Link>
                 </Card.Body>
             </Card>
         </div>

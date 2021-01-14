@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom';
 import { getPoll } from '../../../../api/polls';
 import { PlaceOrder } from '../../PollPreview/PlaceAnOrder';
 import { RestaurantsList } from '../../PollPreview/RestaurantsList';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { IoIosCopy } from "react-icons/io";
+import '../../../../styles/pollPreview.css';
 
 export function PollPreview(props) {
 
@@ -28,11 +31,18 @@ export function PollPreview(props) {
                             <Card.Header className='text-center' as="h5">{poll.label}</Card.Header>
                             <Card.Body>
                                 <Card.Title style={{ marginBottom: '40px' }}>Status: {poll.active === true ? 'active' : 'no longer active'}</Card.Title>
-                                <Card.Text style={{ marginBottom: '40px' }}>
-                                    {poll.id}
+                                <h6 className='mb-3'>Send link below to your friends, and give them chance to vote for your next dinner</h6>
+                                <Card.Text
+                                    style={{ marginBottom: '40px' }}>
+                                    {`http://localhost:3000/polls/${poll.id}`}
+                                    <CopyToClipboard text={`http://localhost:3000/polls/${poll.id}`}><IoIosCopy className='copyButton' size='1.5em' type='button'></IoIosCopy></CopyToClipboard>
+
                                 </Card.Text>
+
+
+
                                 <PlaceOrder poll={poll}></PlaceOrder>
-                                </Card.Body>
+                            </Card.Body>
                         </Card>
                         <RestaurantsList restaurants={poll.restaurants} votes={poll.votes}></RestaurantsList>
 
@@ -42,3 +52,6 @@ export function PollPreview(props) {
         </div>
     )
 }
+
+const appRoot = document.createElement('div');
+document.body.appendChild(appRoot);
