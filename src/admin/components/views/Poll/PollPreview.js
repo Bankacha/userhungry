@@ -6,6 +6,8 @@ import { PlaceOrder } from '../../PollPreview/PlaceAnOrder';
 import { RestaurantsList } from '../../PollPreview/RestaurantsList';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { IoIosCopy } from "react-icons/io";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../../../../styles/pollPreview.css';
 
 export function PollPreview(props) {
@@ -22,6 +24,8 @@ export function PollPreview(props) {
 
     }, []);
 
+    const notify = () => toast('Link is copied to the clipboard!', {type:'dark'})
+
     return (
         <div>
             {
@@ -35,8 +39,8 @@ export function PollPreview(props) {
                                 <Card.Text
                                     style={{ marginBottom: '40px' }}>
                                     {`http://localhost:3000/polls/${poll.id}`}
-                                    <CopyToClipboard text={`http://localhost:3000/polls/${poll.id}`}><IoIosCopy className='copyButton' size='1.5em' type='button'></IoIosCopy></CopyToClipboard>
-
+                                    <CopyToClipboard text={`http://localhost:3000/polls/${poll.id}`}><IoIosCopy onClick={notify} className='copyButton' size='1.5em' type='button'></IoIosCopy></CopyToClipboard>
+                                    <ToastContainer/>
                                 </Card.Text>
 
 
