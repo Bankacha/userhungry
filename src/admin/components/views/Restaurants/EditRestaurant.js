@@ -6,14 +6,16 @@ export function EditRestaurant(props) {
         return props.restaurants.find(r => r.id === props.id)
     }
 
-const current = currentRestaurant();
+    const current = currentRestaurant();
 
-    console.log(current)
+    const forEdit = current ? current : {name: 'no', id: 'no', address: 'no'}
+
+    console.log(forEdit)
 
     return (
         <Form>
             <Form.Group controlId="formBasicEmail">
-                <Form.Label>Restaurant Name</Form.Label>
+                <Form.Label>Restaurant Name is <strong>{forEdit.name}</strong></Form.Label>
                 <Form.Control></Form.Control>
                 <Form.Text className="text-muted">
                     You can change current restaurant name, just type a new one
@@ -21,7 +23,7 @@ const current = currentRestaurant();
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
-                <Form.Label>Address</Form.Label>
+                <Form.Label>Restaurant address is <strong>{forEdit.address}</strong></Form.Label>
                 <Form.Control/>
                 <Form.Text className="text-muted">
                     You can change current restaurant address, just type a new one
