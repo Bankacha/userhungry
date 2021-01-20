@@ -2,14 +2,15 @@ import { useParams } from "react-router-dom"
 import {Card , Button} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
+
 export function PollVote() {
 
     const { pollId } = useParams();
 
 
+
     return (
         <div>
-            <h1>Poll Vote Page for Poll with id: {pollId}</h1>
             <Card>
                 <Card.Header as="h5">Poll Vote</Card.Header>
                 <Card.Body>

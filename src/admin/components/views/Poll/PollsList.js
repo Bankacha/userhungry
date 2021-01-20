@@ -24,7 +24,8 @@ export function PollsList(props) {
                         <h2 className='text-center'>Polls</h2>
                     </Col>
                 </Row>
-                <Link to='polls/create'><Button className='mb-3' variant='dark' style={{width: '100%'}}>Create New</Button></Link>
+
+                <Link to='polls/create'><Button onClick={()=>console.log('MIR BOŽIJI HRISTOS SE RODI')} className='mb-3' variant='dark' style={{width: '100%'}}>Create New</Button></Link>
                 <PollsListTable></PollsListTable>
             </Col>
         </Row>

@@ -31,6 +31,7 @@ export function PollsCreate(props) {
         const IdList = selectedRestaurants.map(r => r.id);
 
         createPoll(label, IdList)
+        
             .then(r => {
                 history.push(`/admin/polls/${r.data.id}`);
             })
@@ -85,13 +86,13 @@ export function PollsCreate(props) {
                         {
                             selectedRestaurants.map((r, i) => {
                                 return (
-                                    <Row onMouseLeave={()=>setHovered(-1)} onMouseOver={() => setHovered(i)} key={i} className="justify-content-between shadow-sm bg-light my-4 p-2 rounded">
+                                    <Row onMouseLeave={() => setHovered(-1)} onMouseOver={() => setHovered(i)} key={i} className="justify-content-between shadow-sm bg-light my-4 p-2 rounded">
                                         <Col onClick={() => deleteFromWishlist(r)}>
                                             {r.name}
                                             {
                                                 hovered === i ? <IoIosClose size='1.5em'></IoIosClose> : ''
                                             }
-                                             </Col>
+                                        </Col>
                                     </Row>
                                 )
                             })

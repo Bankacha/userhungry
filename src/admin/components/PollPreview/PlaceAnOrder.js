@@ -1,9 +1,9 @@
-import { Accordion, Form, Card, Button } from 'react-bootstrap'
+import { Form, Card, Button } from 'react-bootstrap'
 import { IoIosCheckmark } from "react-icons/io";
 import { postOrder } from '../../../api/orders'
 import { useForm } from "react-hook-form";
-import { useState } from 'react';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export function PlaceOrder(props) {
@@ -12,10 +12,12 @@ export function PlaceOrder(props) {
     const onSubmit = data => {
 
         postOrder(winner.id, data.name).then(r => console.log(r.data));
-        alert('Order created successfully!')
+        notify()
 
         reset()
     };
+
+    const notify = () => toast('Order created successfully!', {type:'dark'})
 
     // const [ name , setName] = useState('')
 
@@ -45,6 +47,7 @@ export function PlaceOrder(props) {
                     </Form.Group>
 
                     <Button type="submit" variant="secondary" style={{ width: '100%' }}><IoIosCheckmark size='2em' /></Button>
+                    <ToastContainer/>
                 </Form>
             </Card>
         ) : <p>There is no winner.</p>
