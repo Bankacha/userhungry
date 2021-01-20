@@ -23,7 +23,7 @@ export function PollsListTable() {
         <Table striped bordered hover variant="dark">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th></th>
                     <th>Poll name</th>
                     <th>Is active?</th>
                     <th>Created</th>

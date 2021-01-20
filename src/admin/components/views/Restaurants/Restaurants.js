@@ -3,7 +3,7 @@ import { Button, Row, Col, Table } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { getRestaurants } from "../../../../api/restaurants";
 import '../../../../styles/restaurants.css'
-import { EditRestaurant } from './EditRestaurant'
+import { EditRestaurant } from '../../../components/Restaurants/EditRestaurant'
 import { IoEyeOutline, IoPencil } from "react-icons/io5";
 
 export function Restaurants() {
@@ -17,7 +17,7 @@ export function Restaurants() {
     const history = useHistory()
 
     const handleClick = (id) => {
-        history.push(`/admin/restaurants/${id}/meals`)
+        history.push(`/admin/restaurants/${id}`)
     }
 
     useEffect(() => {
@@ -44,13 +44,12 @@ export function Restaurants() {
         <div>
             <h1 className="text-center">Restaurants</h1>
             <Row className='mt-4'>
-                <Col md={clicked === false ? 12 : 8}>
-                    <Table className='bg-info mt-3'>
-                        <thead className='thead'>
+                <Col>
+                    <Table striped bordered hover variant="dark">
+                        <thead>
                             <tr>
                                 <th>NAME</th>
-                                <th>EDIT</th>
-                                <th className='text-center'>SHOW MEALS</th>
+                                <th className='text-center'>SHOW</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,7 +58,6 @@ export function Restaurants() {
                                     return (
                                         <tr key={i}>
                                             <th>{r.name}</th>
-                                            <th><IoPencil size='2em' type='button' onClick={ ()=> handleEditButton(r.id)}></IoPencil></th>
                                             <th className='text-center'><IoEyeOutline size='2em' type='button' onClick={() => handleClick(r.id)}></IoEyeOutline></th>
                                         </tr>
                                     )
@@ -69,11 +67,7 @@ export function Restaurants() {
                         </tbody>
                     </Table>
                 </Col>
-                <Col mt={4}>
-                    {
-                    clicked === true ? <EditRestaurant restaurants={restaurants} id={clickedID}></EditRestaurant> : ''
-                    }
-                </Col>
+
             </Row>
         </div>
 
