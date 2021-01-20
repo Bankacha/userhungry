@@ -5,6 +5,7 @@ import { PollsCreate } from "../components/views/Poll/PollCreate";
 import { PollPreview } from "../components/views/Poll/PollPreview";
 import { PollsList } from "../components/views/Poll/PollsList";
 import { Restaurants } from "../components/views/Restaurants/Restaurants";
+import { Meals } from '../components/views/Restaurants/Meals'
 
 export function AdminLayout(props) {
 
@@ -25,7 +26,8 @@ export function AdminLayout(props) {
                     <Route path={`${path}/polls/create`} component={PollsCreate}></Route>
                     <Route path={`${path}/polls/:pollId`} component={PollPreview}></Route>
                     <Route path={`${path}/polls`} component={PollsList}></Route>
-
+                    
+                    <Route path={`${path}/restaurants/:restID/meals`} component={Meals}></Route>
                     <Route path={`${path}/restaurants`} component={Restaurants}></Route>
                     
                     <Route exact path={`${path}`} component={AdminDashboard}></Route>

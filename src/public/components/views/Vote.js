@@ -4,7 +4,6 @@ import { Card, Button } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
 import { postVote } from '../../../api/polls';
 import { useHistory } from 'react-router-dom';
-import { getRestaurants } from '../../../api/restaurants'
 
 export function Vote() {
 

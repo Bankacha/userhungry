@@ -1,4 +1,4 @@
-import { Accordion, Form, Card, Button } from 'react-bootstrap'
+import { Form, Card, Button } from 'react-bootstrap'
 import { IoIosCheckmark } from "react-icons/io";
 import { postOrder } from '../../../api/orders'
 import { useForm } from "react-hook-form";

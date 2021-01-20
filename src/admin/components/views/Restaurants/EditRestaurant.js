@@ -1,0 +1,36 @@
+import { Form, Button } from 'react-bootstrap'
+
+export function EditRestaurant(props) {
+
+    const currentRestaurant = () => {
+        return props.restaurants.find(r => r.id === props.id)
+    }
+
+const current = currentRestaurant();
+
+    console.log(current)
+
+    return (
+        <Form>
+            <Form.Group controlId="formBasicEmail">
+                <Form.Label>Restaurant Name</Form.Label>
+                <Form.Control></Form.Control>
+                <Form.Text className="text-muted">
+                    You can change current restaurant name, just type a new one
+                </Form.Text>
+            </Form.Group>
+
+            <Form.Group controlId="formBasicPassword">
+                <Form.Label>Address</Form.Label>
+                <Form.Control/>
+                <Form.Text className="text-muted">
+                    You can change current restaurant address, just type a new one
+                </Form.Text>
+            </Form.Group>
+            <Button variant="primary" type="submit">
+                Submit edit
+                
+            </Button>
+        </Form>
+    )
+}

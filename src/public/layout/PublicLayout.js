@@ -2,7 +2,6 @@ import { Container, Navbar } from "react-bootstrap";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { PollVote } from "../components/views/PollVote";
 import { Vote } from '../components/views/Vote'
-import { RestaurantsList } from '../../admin/components/PollPreview/RestaurantsList'
 import { Results } from "../components/views/VoteResults"
 
 export function PublicLayout(props) {
