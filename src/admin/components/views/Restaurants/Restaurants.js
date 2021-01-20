@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { getRestaurants } from "../../../../api/restaurants";
 import '../../../../styles/restaurants.css'
 import { EditRestaurant } from './EditRestaurant'
+import { IoEyeOutline, IoPencil } from "react-icons/io5";
 
 export function Restaurants() {
 
@@ -49,7 +50,7 @@ export function Restaurants() {
                             <tr>
                                 <th>NAME</th>
                                 <th>EDIT</th>
-                                <th>SHOW MEALS</th>
+                                <th className='text-center'>SHOW MEALS</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,8 +59,8 @@ export function Restaurants() {
                                     return (
                                         <tr key={i}>
                                             <th>{r.name}</th>
-                                            <th><Button onClick={ ()=> handleEditButton(r.id)}></Button></th>
-                                            <th><Button type='button' onClick={() => handleClick(r.id)}></Button></th>
+                                            <th><IoPencil size='2em' type='button' onClick={ ()=> handleEditButton(r.id)}></IoPencil></th>
+                                            <th className='text-center'><IoEyeOutline size='2em' type='button' onClick={() => handleClick(r.id)}></IoEyeOutline></th>
                                         </tr>
                                     )
                                 })
@@ -69,7 +70,9 @@ export function Restaurants() {
                     </Table>
                 </Col>
                 <Col mt={4}>
-                    <EditRestaurant restaurants={restaurants} id={clickedID}></EditRestaurant>
+                    {
+                    clicked === true ? <EditRestaurant restaurants={restaurants} id={clickedID}></EditRestaurant> : ''
+                    }
                 </Col>
             </Row>
         </div>
