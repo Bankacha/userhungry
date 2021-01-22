@@ -44,7 +44,7 @@ export function EditRestaurant(props) {
                                         You can change current restaurant address, just type a new one
                                 </Form.Text>
                                 </Form.Group>
-                                <Button onClick={edit}variant="info" type="button">
+                                <Button onClick={edit} variant="dark" type="button">
                                     Submit edit
                             </Button>
                             </Form>

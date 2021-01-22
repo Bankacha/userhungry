@@ -4,9 +4,12 @@ import { postOrder } from '../../../api/orders'
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useState } from 'react';
 
 
 export function PlaceOrder(props) {
+
+    const [ name , setName] = useState('')
 
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = data => {
@@ -19,7 +22,7 @@ export function PlaceOrder(props) {
 
     const notify = () => toast('Order created successfully!', {type:'dark'})
 
-    // const [ name , setName] = useState('')
+    
 
     const winnerRestaurant = () => {
         const votes = props.poll.votes.map(v => v.restaurantId)
@@ -43,10 +46,12 @@ export function PlaceOrder(props) {
                 <Form onSubmit={handleSubmit(onSubmit)}>
                     <Form.Group className='mt-4 text-center'>
                         <Form.Label ref={register} value={winner.name} name='restaurant'>Chosen Restaurant is <strong>{winner.name}</strong></Form.Label>
-                        <Form.Control ref={register} name="name" type="string" placeholder="Order Label Name" />
+                        <Form.Control onChange={ e=> setName(e.target.value)} ref={register} name="name" type="string" placeholder="Order Label Name" />
                     </Form.Group>
-
-                    <Button type="submit" variant="secondary" style={{ width: '100%' }}><IoIosCheckmark size='2em' /></Button>
+                    {
+                        name ? ( <Button type="submit" variant="secondary" style={{ width: '100%' }}><IoIosCheckmark size='2em' /></Button>
+                         ) : ''
+                    }
                     <ToastContainer/>
                 </Form>
             </Card>

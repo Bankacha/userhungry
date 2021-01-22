@@ -1,6 +1,6 @@
 import { Table, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from 'react-redux';
-import { IoIosEye } from "react-icons/io";
+import { IoIosEye , IoMdTrash} from "react-icons/io";
 import {Link} from 'react-router-dom'
 //import { pollDelete } from '../../../api/polls';
 import { deletePoll } from '../../../store/actions/pollsAction';
@@ -28,7 +28,7 @@ export function PollsListTable() {
                     <th>Is active?</th>
                     <th>Created</th>
                     <th style={{width: '30px'}}>View</th>
-                    <th>Delete</th>
+                    <th className='text-center'>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,8 +40,8 @@ export function PollsListTable() {
                                 <td>{p.label}</td>
                                 <td>{p.active === true ? 'active' : 'no longer active'}</td>
                                 <td>{p.created.split('T')[0]}</td>
-                                <td><Link to={`polls/${p.id}`}><IoIosEye size='1.5em' type='button'/></Link></td>
-                                <td><Button onClick={ ()=> dispatch(deletePoll(p.id))}>del</Button></td>
+                                <td><Link to={`polls/${p.id}`}><IoIosEye size='1.5em' color="grey" type='button'/></Link></td>
+                                <td className='text-center'><IoMdTrash onClick={ ()=> dispatch(deletePoll(p.id))} size='1.5em' color="grey"></IoMdTrash></td>
                             </tr>
                         )
                     })

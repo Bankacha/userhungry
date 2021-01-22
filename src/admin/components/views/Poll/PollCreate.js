@@ -6,6 +6,7 @@ import { createPoll } from '../../../../api/polls'
 import { useHistory } from 'react-router-dom';
 import { IoIosArrowForward } from 'react-icons/io';
 import { IoIosClose, IoIosCreate } from "react-icons/io";
+import { GiForkKnifeSpoon } from "react-icons/gi";
 
 export function PollsCreate(props) {
 
@@ -30,14 +31,19 @@ export function PollsCreate(props) {
     const create = () => {
         const IdList = selectedRestaurants.map(r => r.id);
 
-        createPoll(label, IdList)
-        
-            .then(r => {
-                history.push(`/admin/polls/${r.data.id}`);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        if (!label) {
+            alert('please enter poll label')
+        } else {
+            createPoll(label, IdList)
+
+                .then(r => {
+                    history.push(`/admin/polls/${r.data.id}`);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+
     }
 
     // x button function
@@ -59,11 +65,11 @@ export function PollsCreate(props) {
             <Form.Group controlId="exampleForm.ControlSelect1">
                 <Row>
                     <Col className='offset-1 md-3'>
-                        <Form.Label className='mt-3 mb-5'><strong>Click on restaurant to make a WishList &gt;</strong></Form.Label>
+                        <Form.Label className='mt-3 mb-5 pollsCreateText'><strong>Click on restaurant to make a WishList &gt;</strong></Form.Label>
 
                     </Col>
                     <Col className=' md-3'>
-                        <Form.Label className='mt-3 mb-5'><strong>Wishlist</strong></Form.Label>
+                        <Form.Label className='mt-3 mb-5 pollsCreateText2'><strong>Wishlist</strong></Form.Label>
                     </Col>
                 </Row>
 
@@ -98,9 +104,9 @@ export function PollsCreate(props) {
                             })
                         }
                     </Col>
-                    <Col className='md-2'>
+                    <Col className='md-2 createCol'>
                         {
-                            selectedRestaurants.length ? <IoIosCreate onClick={() => create()} type="button" variant="success" size='3.7em' className='createBtn' /> : ''
+                            selectedRestaurants.length ? <GiForkKnifeSpoon onClick={() => create()} type="button" variant="success" size='8em' className='createBtn' /> : ''
                         }
                     </Col>
                 </Row>

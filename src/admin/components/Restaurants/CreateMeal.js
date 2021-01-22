@@ -9,7 +9,7 @@ import { getRestaurant } from '../../../api/restaurants'
 export function CreateMeal(props) {
 
     const [name, setName] = useState('');
-    const [price, setPrice] = useState('');
+    const [price, setPrice] = useState(0);
     const [checked, setChecked] = useState(false);
     const [error, setError] = useState(false)
 
@@ -36,16 +36,21 @@ export function CreateMeal(props) {
             "price": price,
             "available": checked
         }
-        createMeal(props.id, body)
-            .then(r => {
-                props.loadRestaurant()
-            })
-            .catch(() => setError(true))
+
+        if (!name || !price) {
+            alert('please set name and price correctly')
+        } else {
+            createMeal(props.id, body)
+                .then(r => {
+                    props.loadRestaurant()
+                })
+                .catch(() => setError(true))
+        }
+
 
         resetForm()
     }
 
-    console.log(name, price, checked, props.id)
     return (
         <Form id='form' className='w-100 form'>
             <Form.Group className='mt-3'>
@@ -63,7 +68,7 @@ export function CreateMeal(props) {
                         <Form.Control onChange={(e) => setPrice(e.target.value)} type="number" />
                     </Col>
                     <Col>
-                        <Button onClick={handleMealCreation} variant="info" type="button">
+                        <Button onClick={handleMealCreation} variant="dark" type="button">
                             Create Meal
                         </Button>
                     </Col>
