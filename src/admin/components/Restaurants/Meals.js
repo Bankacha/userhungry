@@ -7,12 +7,12 @@ export function Meals(props) {
 
     return (
         <div>
-            <CreateMeal></CreateMeal>
+            <CreateMeal loadRestaurant={props.loadRestaurant} id={props.id}></CreateMeal>
             <Table striped bordered hover variant="dark">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Mealame</th>
+                        <th>Meal name</th>
                         <th>Is available?</th>
                         <th>Price</th>
                         <th>Edit</th>

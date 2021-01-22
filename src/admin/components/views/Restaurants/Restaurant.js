@@ -31,7 +31,7 @@ export function Restaurant() {
                         <EditRestaurant onEdited={() => loadRestaurant()} restaurant={restaurant}></EditRestaurant>
                         <hr />
                         <h3 className="my-4">Meals:</h3>
-                        <Meals meals={restaurant.meals}></Meals>
+                        <Meals loadRestaurant={loadRestaurant} id={restaurant.id} meals={restaurant.meals}></Meals>
                     </div>
                 ) : 'There is no restaurant with this id.'
             }
