@@ -1,5 +1,6 @@
 import { Container, Navbar } from "react-bootstrap";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
+import { Footer } from "../../admin/components/views/footer";
 import { PollVote } from "../components/views/PollVote";
 import { Vote } from '../components/views/Vote'
 import { Results } from "../components/views/VoteResults"
@@ -20,6 +21,7 @@ export function PublicLayout(props) {
                     <Route path={`${path}polls/:pollId`} component={PollVote}></Route>
                 </Switch>
             </Container>
+            <Footer></Footer>
         </div>
     )
 }

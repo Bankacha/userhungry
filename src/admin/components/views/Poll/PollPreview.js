@@ -30,7 +30,7 @@ export function PollPreview(props) {
         <div>
             {
                 poll ? (
-                    <div>
+                    <div className='mb-3'>
                         <Card className="bg-dark text-white">
                             <Card.Header className='text-center' as="h5">{poll.label}</Card.Header>
                             <Card.Body>

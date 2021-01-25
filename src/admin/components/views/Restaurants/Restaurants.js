@@ -23,7 +23,6 @@ export function Restaurants() {
     useEffect(() => {
         getRestaurants().then(r => {
             setRestaurants(r.data)
-            console.log(restaurants)
         })
     }, [])
 

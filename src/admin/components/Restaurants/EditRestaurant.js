@@ -1,13 +1,19 @@
 import { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap'
+import { Link, useHistory } from 'react-router-dom';
 import { updateRestaurant } from '../../../api/restaurants'
 
 export function EditRestaurant(props) {
 
-    const [name, setName] = useState('')
-    const [address, setAddress] = useState('')
+    const [name, setName] = useState(props.restaurant.name)
+    const [address, setAddress] = useState(props.restaurant.address)
     const [error, setError] = useState(false)
 
+    const history = useHistory();
+
+    const goBack = () => {
+        history.push("./");
+    }
 
     const edit = () => {
         const body = { ...props.restaurant }
@@ -19,6 +25,7 @@ export function EditRestaurant(props) {
             .then(r => props.onEdited())
             .catch(() => setError(true))
 
+        goBack()
     }
 
     return (
@@ -30,18 +37,18 @@ export function EditRestaurant(props) {
                             {error ? <div className="alert alert-danger">Error while saving.</div> : ''}
                             <Form>
                                 <Form.Group controlId="formBasicEmail">
-                                    <Form.Label>Restaurant Name is <strong>{props.restaurant.name}</strong></Form.Label>
-                                    <Form.Control onChange={(e) => setName(e.target.value)} />
+                                    <Form.Label>Restaurant Name is:</Form.Label>
+                                    <Form.Control value={name} onChange={(e) => setName(e.target.value)} />
                                     <Form.Text className="text-muted">
-                                        You can change current restaurant name, just type a new one
+                                        You can edit/change current restaurant name.
                                 </Form.Text>
                                 </Form.Group>
 
                                 <Form.Group controlId="formBasicPassword">
-                                    <Form.Label>Restaurant address is <strong>{props.restaurant.address}</strong></Form.Label>
-                                    <Form.Control onChange={(e) => setAddress(e.target.value)} />
+                                    <Form.Label>Restaurant address is:</Form.Label>
+                                    <Form.Control value={address} onChange={(e) => setAddress(e.target.value)} />
                                     <Form.Text className="text-muted">
-                                        You can change current restaurant address, just type a new one
+                                        You can edit/change current restaurant address.
                                 </Form.Text>
                                 </Form.Group>
                                 <Button onClick={edit} variant="dark" type="button">

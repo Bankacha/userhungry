@@ -9,11 +9,10 @@ import { getRestaurant } from '../../../api/restaurants'
 export function CreateMeal(props) {
 
     const [name, setName] = useState('');
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState('');
     const [checked, setChecked] = useState(false);
     const [error, setError] = useState(false)
 
-    const { restaurantId } = useParams();
 
     const handleCheck = () => {
         if (checked === true) {
@@ -24,10 +23,9 @@ export function CreateMeal(props) {
     }
 
     const resetForm = () => {
-        // setName('');
-        // setPrice(null);
-        // setChecked(false);
-        document.getElementById("form").reset();
+        setName('');
+        setPrice('');
+        setChecked(false);
     }
 
     const handleMealCreation = () => {
@@ -42,14 +40,14 @@ export function CreateMeal(props) {
         } else {
             createMeal(props.id, body)
                 .then(r => {
+                    resetForm()
                     props.loadRestaurant()
+                    
                 })
                 .catch(() => setError(true))
         }
-
-
-        resetForm()
     }
+    console.log(name, price, checked)
 
     return (
         <Form id='form' className='w-100 form'>
@@ -59,13 +57,13 @@ export function CreateMeal(props) {
                         <h4>Create new meal:</h4>
                     </Col>
                     <Col>
-                        <Form.Control onChange={(e) => setName(e.target.value)} />
+                        <Form.Control value={name} onChange={(e) => setName(e.target.value)} />
                     </Col>
                     <Col>
-                        <Form.Check onClick={() => handleCheck(true)} className='mt-2' type="checkbox" label="Check if available" />
+                        <Form.Check checked={checked} onChange={(e) => handleCheck(e.target.checked)} className='mt-2' type="checkbox" label="Check if available" />
                     </Col>
                     <Col>
-                        <Form.Control onChange={(e) => setPrice(e.target.value)} type="number" />
+                        <Form.Control value={price} onChange={(e) => setPrice(e.target.value)} type="number" />
                     </Col>
                     <Col>
                         <Button onClick={handleMealCreation} variant="dark" type="button">
