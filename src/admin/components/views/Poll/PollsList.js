@@ -21,7 +21,7 @@ export function PollsList(props) {
             <Col>
                 <Row className='mb-5'>
                     <Col>
-                        <h2 className='text-center'>Polls</h2>
+                        <h1 className='text-center'>Polls</h1>
                     </Col>
                 </Row>
 

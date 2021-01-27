@@ -23,7 +23,7 @@ export function PollPreview(props) {
         });
 
     }, []);
-
+    
     const notify = () => toast('Link is copied to the clipboard!', {type:'dark'})
 
     return (

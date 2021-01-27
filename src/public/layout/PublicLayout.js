@@ -4,6 +4,7 @@ import { Footer } from "../../admin/components/views/footer";
 import { PollVote } from "../components/views/PollVote";
 import { Vote } from '../components/views/Vote'
 import { Results } from "../components/views/VoteResults"
+import { CreateOrder } from "../components/views/orders/OrderCreate"
 
 export function PublicLayout(props) {
 
@@ -16,6 +17,8 @@ export function PublicLayout(props) {
             </Navbar>
             <Container>
                 <Switch>
+                    <Route exact path={`${path}polls/:pollId/order`} component={CreateOrder}></Route>
+
                     <Route path={`${path}polls/:pollId/result`} component={Results}></Route>
                     <Route path={`${path}polls/:pollId/vote`} component={Vote}></Route>
                     <Route path={`${path}polls/:pollId`} component={PollVote}></Route>
