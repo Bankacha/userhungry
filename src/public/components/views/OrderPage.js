@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router";
-import { Table, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { Cart } from "../orders/Cart"
 import { getOrder } from "../../../api/orders"
 import { getRestaurant } from "../../../api/restaurants";
-import { MealItem } from "../orders/mealItem";
-
+import { MealItem } from "../orders/MealItem";
+import { AddMealModal } from '../orders/AddMealModal';
 
 export function CreateOrder() {
 
     const [order, setOrder] = useState({});
     const [restaurant, setRestaurant] = useState(null)
 
-    const { orderId } = useParams();
+    const [addingMeal, setAddingMeal] = useState(null);
+    const [cartItems, setCartItems] = useState([]);
 
+
+    const { orderId } = useParams();
 
     useEffect(() => {
         getOrder(orderId)
@@ -30,28 +33,47 @@ export function CreateOrder() {
 
     }, [])
 
+    const addMeal = (meal) => {
+        setAddingMeal(meal);
+    }
+    
+    const addMealToCart = (cartItem) => { // -> {mealId, quantity, note?}
+        setCartItems([...cartItems, cartItem]);
+        setAddingMeal(null);
+    }
 
-    console.log(order)
+    const clearCart = () => {
+        setCartItems([])
+    }
+
     return (
         <div>
-            <h2 className='text-center my-5'>mAkE your order</h2>
+            <AddMealModal
+                meal={addingMeal}
+                onCancel={() => setAddingMeal(null)}
+                onSubmit={addMealToCart}
+                show={addingMeal ? true : false}
+            ></AddMealModal>
+
+            <h2 className='text-center my-5'><i>mAkE yOUr OrdEr</i></h2>
             <Row>
-                <Col md={8} className="p-4">
+                <Col className={`p-4 ${cartItems} ? md-12 : md-7`}>
                     {
 
                         restaurant ? (restaurant.meals || []).map((m, i) => {
                             return (
-                                <MealItem key={i} mealItem={m}></MealItem>
+                                <MealItem onAdd={addMeal} key={i} mealItem={m}></MealItem>
                             )
                         }) : ''
                     }
                 </Col>
-                <Col md={4} className="p-4">
-                    <Cart></Cart>
-                </Col>
-
+                {
+                    cartItems.length ? (<Col md={5} className="p-4">
+                    <Cart clearCart={clearCart} orderId={orderId} meals={restaurant ? restaurant.meals : []} cartItems={cartItems}></Cart>
+                </Col>) : ''
+                }
+                
             </Row>
-
         </div>
 
     )

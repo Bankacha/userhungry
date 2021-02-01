@@ -15,3 +15,10 @@ export function getOrders() {
 export function getOrder(pollId) {
     return Http.get(`/orders/${pollId}`)
 }
+
+export function sendOrderItems(orderId, payloads) {
+    return Http.post(`/orders/${orderId}/items`, {
+        ...payloads
+    })
+
+}

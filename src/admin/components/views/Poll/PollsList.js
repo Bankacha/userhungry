@@ -19,9 +19,9 @@ export function PollsList(props) {
     return (
         <Row>
             <Col>
-                <Row className='mb-5'>
+                <Row className='mb-4'>
                     <Col>
-                        <h1 className='text-center'>Polls</h1>
+                        <h1 className='text-center'><i>Polls</i></h1>
                     </Col>
                 </Row>
 

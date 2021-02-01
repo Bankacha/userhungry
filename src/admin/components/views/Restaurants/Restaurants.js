@@ -41,7 +41,7 @@ export function Restaurants() {
 
     return (
         <div>
-            <h1 className="text-center">Restaurants</h1>
+            <h1 className="text-center"><i>Restaurants</i></h1>
             <Row className='mt-4'>
                 <Col>
                     <Table striped bordered hover variant="dark">
