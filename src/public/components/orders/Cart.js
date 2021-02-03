@@ -69,7 +69,7 @@ export function Cart(props) {
 
                     <Card.Footer><Form.Control value={consumer} onChange={(e) => setConsumer(e.target.value)} placeholder='Consumer name'></Form.Control></Card.Footer>
                     {
-                        consumer ? <Button onClick={()=>sendOrder(props.orderId)}>SEND</Button> : ''
+                        consumer ? <Button variant='dark' onClick={()=>sendOrder(props.orderId)}>SEND</Button> : ''
                     }
                 </Card>
             </Col>

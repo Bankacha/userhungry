@@ -13,7 +13,7 @@ export function MealItem(props) {
                 {props.mealItem.price} $
                 </Col>
             <Col md={2}>
-                <Button onClick={() => props.onAdd(props.mealItem)}>Add</Button>
+                <Button variant='dark' onClick={() => props.onAdd(props.mealItem)}>Add</Button>
             </Col>
         </div>
     )

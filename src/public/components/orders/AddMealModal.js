@@ -5,20 +5,26 @@ export function AddMealModal(props) {
   const [quantity, setQuantity] = useState(1);
   const [note, setNote] = useState("");
 
+  const reset = () => {
+    setNote("")
+    setQuantity(1)
+  }
+
   const submit = () => {
     const payload = {
-      quantity: quantity,
+      quantity: parseInt(quantity),
       mealId: props.meal.id,
       note: note,
     };
 
     props.onSubmit(payload);
-    console.log(payload)
+
+    reset()
   };
 
   return (
     <Modal show={props.show} onHide={props.onHide}>
-      <Modal.Header closeButton>
+      <Modal.Header >
         <Modal.Title>{props.meal ? props.meal.name : ''}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -27,7 +33,7 @@ export function AddMealModal(props) {
             Quantity:
           </Col>
           <Col lg={3}>
-            <Form.Control onChange={(e)=>setQuantity(e.target.value)} as="select" custom>
+            <Form.Control onChange={(e) => setQuantity(e.target.value)} as="select" custom>
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -41,8 +47,8 @@ export function AddMealModal(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onCancel} variant="secondary">Close</Button>
-        <Button onClick={submit} variant="primary">
-          Dodaj
+        <Button onClick={submit} variant="dark">
+          To cart
         </Button>
       </Modal.Footer>
     </Modal>

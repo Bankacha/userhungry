@@ -9,6 +9,7 @@ import { Restaurants } from "../components/views/Restaurants/Restaurants";
 import { Footer } from "../components/views/footer"
 import { Orders } from "../components/views/Orders/Orders"
 import '../../styles/container.css';
+import { Ordered } from "../components/views/Orders/Ordered";
 
 export function AdminLayout(props) {
 
@@ -35,6 +36,7 @@ export function AdminLayout(props) {
                     <Route path={`${path}/restaurants/:restId`} component={Restaurant}></Route>
                     <Route path={`${path}/restaurants`} component={Restaurants}></Route>
 
+                    <Route path={`${path}/orders/:orderId`} component={Ordered}></Route>
                     <Route path={`${path}/orders`} component={Orders}></Route>
 
                     <Route exact path={`${path}`} component={AdminDashboard}></Route>

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { getOrders } from "../../../../api/orders"
 
-export function Orders() {
+export function Orders(props) {
 
     const [orders, setOrders] = useState([]);
     const [error, setError] = useState(false)
@@ -11,8 +12,6 @@ export function Orders() {
         getOrders().then(r => setOrders(r.data))
             .catch(e => setError(true))
     }, [])
-
-    console.log(orders)
 
     return (
         <div>
@@ -29,7 +28,7 @@ export function Orders() {
                     {
                         orders ? (orders || []).map((r, i) => {
                             return (
-                                <tr key={i}>
+                                <tr key={i} onClick={() => props.history.push(`orders/${r.id}`)}>
                                     <td>{r.label}</td>
                                     <td className='text-center'>{r.active === true ? 'yes' : 'no'}</td>
                                     <td className='text-center'>{r.created.split('T')[0]}</td>
