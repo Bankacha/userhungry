@@ -5,7 +5,7 @@ import { getMeals } from "../../../../api/meals";
 import { SingleOrder } from "../../Order/SingleOrder";
 
 
-export function Ordered() {
+export function OrderPage() {
 
     const { orderId } = useParams();
 
@@ -30,6 +30,7 @@ export function Ordered() {
     }, [])
 
 
+    // CALCULATIONS FOR ALL ORDER ITEMS ON ONE ORDER PAGE 
     const calculate = () => {
         const payloadsList = orderItems.map(o => o.payloads)
 
@@ -53,6 +54,45 @@ export function Ordered() {
 
         return total
     }
+    // OTHER WAY FOR THE SAME CALCULATIONS
+
+    // const calculate = () => {
+    //     let payloadsList = [];
+    //     orderItems.forEach(item => {
+    //         payloadsList = [...payloadsList, ...item.payloads];
+    //     })
+        
+    //     let total = 0;
+
+    //     payloadsList.forEach(payload => {
+    //         const meal = findMeal(payload.mealId);
+    //         const mealTotal = meal.price * parseInt(payload.quantity);
+    //         total += mealTotal;
+    //     })
+
+    //     return total
+    // }
+
+    // MAKING A LIST THAT CAN BE RENDERED SO CONSUMER NAME TAKES EVERY FIRST ROW-POSITION FOR HIS EVERY MEAL
+    const list = []
+    const testList = orderItems.map( oi=> [[oi.consumer], ...oi.payloads])
+
+    console.log(orderItems,testList)
+
+    const singleOrderList = (obj) => {
+        const body = {
+            consumer: obj.consumer,
+            mealId: obj.payloads.map(el=>el.mealId),
+            quantity: obj.payloads.quantity,
+            note: obj.payloads.note
+        }
+        return body
+    }
+
+    const transformed = orderItems.map( oi => {
+       return singleOrderList(oi)
+    })
+    console.log(transformed)
 
 
     return (
