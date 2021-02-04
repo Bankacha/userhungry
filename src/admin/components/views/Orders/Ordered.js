@@ -3,6 +3,8 @@ import { useParams } from "react-router";
 import { getOrderItems, getOrder } from "../../../../api/orders";
 import { getMeals } from "../../../../api/meals";
 import { SingleOrder } from "../../Order/SingleOrder";
+import { Table } from "react-bootstrap";
+import { ExelDownloadButton } from "../../Order/ExelDownloadButton";
 
 
 export function OrderPage() {
@@ -54,44 +56,32 @@ export function OrderPage() {
 
         return total
     }
-    // OTHER WAY FOR THE SAME CALCULATIONS
 
-    // const calculate = () => {
-    //     let payloadsList = [];
-    //     orderItems.forEach(item => {
-    //         payloadsList = [...payloadsList, ...item.payloads];
-    //     })
-
-    //     let total = 0;
-
-    //     payloadsList.forEach(payload => {
-    //         const meal = findMeal(payload.mealId);
-    //         const mealTotal = meal.price * parseInt(payload.quantity);
-    //         total += mealTotal;
-    //     })
-
-    //     return total
-    // }
-
-    // MAKING A LIST THAT CAN BE RENDERED SO CONSUMER NAME TAKES EVERY FIRST ROW-POSITION FOR HIS EVERY MEAL
     const testList = orderItems.map(element => ({
         consumer: element.consumer,
         payloads: element.payloads
     }))
 
-    console.log(testList)
     const newList = [];
 
-    testList.forEach( el => {
+    testList.forEach(el => {
+ 
         el.payloads.forEach(e => {
+
+
+            const meal = allMeals.find( m => m.id === e.mealId)
             newList.push({
                 consumer: el.consumer,
-                mealId: e.mealId,
-                quantity: e.quantity
+                mealName: meal?.name,
+                quantity: e.quantity,
+                mealPrice: meal?.price,
+                note: e.note,
+                total: meal.price * e.quantity
             })
+            console.log(meal.price, e.quantity)
         })
     })
-console.log(newList)
+    console.log(newList)
     return (
 
         <div>
@@ -100,7 +90,28 @@ console.log(newList)
                 orderItems.length ? (
                     <div>
                         <h1 className='mb-4 text-center'><i>Ordered saldo is - {calculate()} $</i></h1>
-                        <SingleOrder allMeals={allMeals} orderItems={orderItems}></SingleOrder>
+                        <ExelDownloadButton list={newList}></ExelDownloadButton>
+
+                        <Table className='mt-3' striped bordered hover variant="dark">
+                            <thead>
+                                <tr>
+                                    <th>Consumer</th>
+                                    <th>Meal name</th>
+                                    <th>Meal Price</th>
+                                    <th>Quantity</th>
+                                    <th>Note</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    newList.map((el, i) => {
+                                        return (
+                                                <SingleOrder key={i} item={el}></SingleOrder>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </Table>
                     </div>
                 ) : <h2 className='mt-5 text-center'>Sorry, but there are no orders for this one</h2>
             }
