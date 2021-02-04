@@ -41,7 +41,7 @@ export function OrderPage() {
                 list.push(a)
             })
         })
-        
+
         let total = 0;
 
         list.forEach(l => {
@@ -61,7 +61,7 @@ export function OrderPage() {
     //     orderItems.forEach(item => {
     //         payloadsList = [...payloadsList, ...item.payloads];
     //     })
-        
+
     //     let total = 0;
 
     //     payloadsList.forEach(payload => {
@@ -74,28 +74,26 @@ export function OrderPage() {
     // }
 
     // MAKING A LIST THAT CAN BE RENDERED SO CONSUMER NAME TAKES EVERY FIRST ROW-POSITION FOR HIS EVERY MEAL
-    const list = []
-    const testList = orderItems.map( oi=> [[oi.consumer], ...oi.payloads])
+    const testList = orderItems.map(element => ({
+        consumer: element.consumer,
+        payloads: element.payloads
+    }))
 
-    console.log(orderItems,testList)
+    console.log(testList)
+    const newList = [];
 
-    const singleOrderList = (obj) => {
-        const body = {
-            consumer: obj.consumer,
-            mealId: obj.payloads.map(el=>el.mealId),
-            quantity: obj.payloads.quantity,
-            note: obj.payloads.note
-        }
-        return body
-    }
-
-    const transformed = orderItems.map( oi => {
-       return singleOrderList(oi)
+    testList.forEach( el => {
+        el.payloads.forEach(e => {
+            newList.push({
+                consumer: el.consumer,
+                mealId: e.mealId,
+                quantity: e.quantity
+            })
+        })
     })
-    console.log(transformed)
-
-
+console.log(newList)
     return (
+
         <div>
             {
 
@@ -106,6 +104,7 @@ export function OrderPage() {
                     </div>
                 ) : <h2 className='mt-5 text-center'>Sorry, but there are no orders for this one</h2>
             }
+
         </div>
 
 
