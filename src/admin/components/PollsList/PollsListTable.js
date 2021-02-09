@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { IoIosEye , IoMdTrash} from "react-icons/io";
 import { Link } from 'react-router-dom'
 import { deletePoll } from '../../../store/actions/pollsAction';
-
+import '../../../styles/thead.css'
 
 export function PollsListTable() {
 
@@ -27,7 +27,7 @@ export function PollsListTable() {
                     polls.map((p, i) => {
                         return (
                             <tr key={i}>
-                                <td>{i + 1}</td>
+                                <td className='td'>{i + 1}</td>
                                 <td>{p.label}</td>
                                 <td>{p.active === true ? 'active' : 'no longer active'}</td>
                                 <td>{p.created.split('T')[0]}</td>

@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { Row, Col, Table } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { getRestaurants } from "../../../../api/restaurants";
-import '../../../../styles/restaurants.css'
 import { IoIosEye } from "react-icons/io";
-
+import { Title } from "../../Shared/Title";
+import '../../../../styles/thead.css'
+import '../../../../styles/td.css'
 export function Restaurants() {
 
     const [restaurants, setRestaurants] = useState([{ 'name': 'no', 'id': 'no', 'address': 'no', 'created': 'no' }]);
@@ -29,12 +30,13 @@ export function Restaurants() {
             {
                 error ? <h2 className='text-center'>Error while loading.</h2> : (
                     <div>
-                        <h1 className="text-center restaurantName"><i>Restaurants</i></h1>
+                        <Title props={"Restaurants"}></Title>
                         <Row className='mt-4'>
                             <Col>
                                 <Table striped bordered hover variant="dark" size="sm">
                                     <thead className='thead'>
                                         <tr>
+                                            <th></th>
                                             <th>NAME</th>
                                             <th className='text-center'>SHOW</th>
                                         </tr>
@@ -44,6 +46,7 @@ export function Restaurants() {
                                             list.map((r, i) => {
                                                 return (
                                                     <tr key={i}>
+                                                        <td className='td'>{i + 1}</td>
                                                         <th>{r.name}</th>
                                                         <th className='text-center'><IoIosEye size='2em' color='gray' type='button' onClick={() => handleClick(r.id)}></IoIosEye></th>
                                                     </tr>

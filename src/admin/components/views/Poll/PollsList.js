@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { getPolls } from "../../../../api/polls";
 import { useDispatch } from 'react-redux';
 import { setPolls } from '../../../../store/actions/pollsAction';
+import { Title } from "../../Shared/Title";
 
 
 
@@ -19,9 +20,9 @@ export function PollsList(props) {
     return (
         <Row>
             <Col>
-                <Row className='mb-3'>
+                <Row>
                     <Col>
-                        <h1 className='text-center restaurantName'><i>Polls</i></h1>
+                       <Title props={"Polls"}></Title>
                     </Col>
                 </Row>
 

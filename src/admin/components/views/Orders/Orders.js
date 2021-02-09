@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { Table } from "react-bootstrap";
 import { getOrders } from "../../../../api/orders"
 import { IoIosEye } from "react-icons/io";
+import { Title } from "../../Shared/Title";
+import '../../../../styles/td.css'
 
 export function Orders(props) {
 
@@ -18,10 +20,11 @@ export function Orders(props) {
             {
                 error ? <h2 className='text-center'>Error while loading.</h2> : (
                     <div>
-                        <h1 className='text-center mb-4 restaurantName'><i>Orders</i></h1>
+                        <Title props={"Orders"}></Title>
                         <Table striped bordered hover variant="dark" size="sm">
                             <thead className='thead'>
                                 <tr>
+                                    <th></th>
                                     <th>Order label</th>
                                     <th className='text-center'>Active?</th>
                                     <th className='text-center'>Creation date</th>
@@ -33,6 +36,7 @@ export function Orders(props) {
                                     orders ? (orders || []).map((r, i) => {
                                         return (
                                             <tr key={i}>
+                                                <td className='td'>{i + 1}</td>
                                                 <td>{r.label}</td>
                                                 <td className='text-center'>{r.active === true ? 'yes' : 'no'}</td>
                                                 <td className='text-center'>{r.created.split('T')[0]}</td>
