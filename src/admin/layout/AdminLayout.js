@@ -9,7 +9,8 @@ import { Restaurants } from "../components/views/Restaurants/Restaurants";
 import { Footer } from "../components/views/footer"
 import { Orders } from "../components/views/Orders/Orders"
 import '../../styles/container.css';
-import { OrderPage } from "../components/views/Orders/Ordered";
+import { OrderPage } from "../components/views/Orders/OrderPage";
+import '../../styles/nav.css'
 
 export function AdminLayout(props) {
 
@@ -18,11 +19,11 @@ export function AdminLayout(props) {
     return (
         <div>
             <Navbar bg="light" variant="light">
-                <Navbar.Brand href="#home">UserHungry</Navbar.Brand>
+                <Navbar.Brand href="/admin" className='navLogo'><strong>UserHungry</strong></Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Link className='nav-link' to={`${path}/polls`}>Polls</Link>
-                    <Link className='nav-link' to={`${path}/restaurants`}>Restaurants</Link>
-                    <Link className='nav-link' to={`${path}/orders`}>Orders</Link>
+                    <Link className='nav-link' to={`${path}/polls`}><strong>Polls</strong></Link>
+                    <Link className='nav-link' to={`${path}/restaurants`}><strong>Restaurants</strong></Link>
+                    <Link className='nav-link' to={`${path}/orders`}><strong>Orders</strong></Link>
                 </Nav>
             </Navbar>
             <Container className='pt-5 container'>

@@ -14,14 +14,14 @@ export function PollsList(props) {
 
     useEffect(() => {
         getPolls().then(({ data }) => dispatch(setPolls(data)));
-    }, []);
+    }, [dispatch]);
 
     return (
         <Row>
             <Col>
-                <Row className='mb-4'>
+                <Row className='mb-3'>
                     <Col>
-                        <h1 className='text-center'><i>Polls</i></h1>
+                        <h1 className='text-center restaurantName'><i>Polls</i></h1>
                     </Col>
                 </Row>
 

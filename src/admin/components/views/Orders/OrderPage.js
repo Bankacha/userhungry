@@ -19,7 +19,6 @@ export function OrderPage() {
             .then(({ data }) => {
 
                 getMeals(data.restaurantId).then(({ data }) => {
-                    // data -> [{meal}, {meal}, ...{meal}]
                     setAllMeals(data);
                 })
 
@@ -27,10 +26,8 @@ export function OrderPage() {
                     .then(({ data }) => {
                         setOrderItems(data)
                     })
-
             })
-    }, [])
-
+    }, [orderId])
 
     // CALCULATIONS FOR ALL ORDER ITEMS ON ONE ORDER PAGE 
     const calculate = () => {
@@ -65,48 +62,45 @@ export function OrderPage() {
     const newList = [];
 
     testList.forEach(el => {
- 
+
         el.payloads.forEach(e => {
 
-
-            const meal = allMeals.find( m => m.id === e.mealId)
+            const meal = allMeals.find(m => m.id === e.mealId)
             newList.push({
                 consumer: el.consumer,
                 mealName: meal?.name,
                 quantity: e.quantity,
                 mealPrice: meal?.price,
                 note: e.note,
-                total: meal.price * e.quantity
+                total: meal?.price * e.quantity
             })
-            console.log(meal.price, e.quantity)
         })
     })
-    console.log(newList)
     return (
 
         <div>
             {
-
                 orderItems.length ? (
                     <div>
-                        <h1 className='mb-4 text-center'><i>Ordered saldo is - {calculate()} $</i></h1>
+                        <h1 className='mb-4 text-center restaurantName'><i>Ordered saldo is - {calculate()} $</i></h1>
                         <ExelDownloadButton list={newList}></ExelDownloadButton>
 
-                        <Table className='mt-3' striped bordered hover variant="dark">
-                            <thead>
+                        <Table className='mt-3' striped bordered hover variant="dark" size="sm">
+                            <thead className='thead'>
                                 <tr>
                                     <th>Consumer</th>
                                     <th>Meal name</th>
-                                    <th>Meal Price</th>
-                                    <th>Quantity</th>
                                     <th>Note</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
                                     newList.map((el, i) => {
                                         return (
-                                                <SingleOrder key={i} item={el}></SingleOrder>
+                                            <SingleOrder key={i} item={el}></SingleOrder>
                                         )
                                     })
                                 }
@@ -115,9 +109,6 @@ export function OrderPage() {
                     </div>
                 ) : <h2 className='mt-5 text-center'>Sorry, but there are no orders for this one</h2>
             }
-
         </div>
-
-
     )
 }

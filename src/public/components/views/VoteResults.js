@@ -16,7 +16,7 @@ export function Results() {
             setRestaurants(r.data.restaurants);
             setVotes(r.data.votes)
         })
-    }, [])
+    }, [pollId])
 
     console.log(restaurants)
 

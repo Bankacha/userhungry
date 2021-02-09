@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap'
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { updateRestaurant } from '../../../api/restaurants'
 
 export function EditRestaurant(props) {
@@ -37,7 +37,7 @@ export function EditRestaurant(props) {
                             {error ? <div className="alert alert-danger">Error while saving.</div> : ''}
                             <Form>
                                 <Form.Group controlId="formBasicEmail">
-                                    <Form.Label>Restaurant Name is:</Form.Label>
+                                    <Form.Label><strong>Restaurant Name is:</strong></Form.Label>
                                     <Form.Control value={name} onChange={(e) => setName(e.target.value)} />
                                     <Form.Text className="text-muted">
                                         You can edit/change current restaurant name.
@@ -45,7 +45,7 @@ export function EditRestaurant(props) {
                                 </Form.Group>
 
                                 <Form.Group controlId="formBasicPassword">
-                                    <Form.Label>Restaurant address is:</Form.Label>
+                                    <Form.Label><strong>Restaurant address is:</strong></Form.Label>
                                     <Form.Control value={address} onChange={(e) => setAddress(e.target.value)} />
                                     <Form.Text className="text-muted">
                                         You can edit/change current restaurant address.

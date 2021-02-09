@@ -33,20 +33,26 @@ export function Cart(props) {
             ]
         }
 
-        sendOrderItems(orderId, payload).then(r=>console.log(r.data))
+        sendOrderItems(orderId, payload).then(r => console.log(r.data))
 
         setConsumer('')
         props.clearCart()
     }
 
     return (
-        <div className="justify-content-between shadow-sm bg-light my-3 p-2 rounded row">
-            <Col    >
+        <div className="justify-content-between shadow-sm bg-light p-2 rounded row">
+            <Col>
                 <Card>
                     <Card.Header className='text-center'>ORDER</Card.Header>
                     <Card.Body>
                         {
-                            props.cartItems.map((k, i) => {
+                            !props.cartItems.length ? (
+                                <Row>
+                                    <Col>
+                                        <h4 className='text-center'>Add something to the cart</h4>
+                                    </Col>
+                                </Row>
+                            ) : props.cartItems.map((k, i) => {
                                 return (
                                     <Row key={i}>
                                         <Col md='6'>{getMealProperty('name', k.mealId)}</Col>
@@ -57,19 +63,21 @@ export function Cart(props) {
                                 )
                             })
                         }
-
                         <hr></hr>
-                        <Row>
-                            <Col>
-                                <h4 className='text-right'>Total: {total()}$</h4>
-                            </Col>
-                        </Row>
+                        {
+                            props.cartItems.length ? (
+                                <Row>
+                                    <Col>
+                                        <h4 className='text-right'>Total: {total()}$</h4>
+                                    </Col>
+                                </Row>
+
+                            ) : ''
+                        }
                     </Card.Body>
-
-
                     <Card.Footer><Form.Control value={consumer} onChange={(e) => setConsumer(e.target.value)} placeholder='Consumer name'></Form.Control></Card.Footer>
                     {
-                        consumer ? <Button variant='dark' onClick={()=>sendOrder(props.orderId)}>SEND</Button> : ''
+                        consumer ? <Button variant='dark' onClick={() => sendOrder(props.orderId)}>SEND</Button> : ''
                     }
                 </Card>
             </Col>

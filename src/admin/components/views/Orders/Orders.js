@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { getOrders } from "../../../../api/orders"
+import { IoIosEye } from "react-icons/io";
 
 export function Orders(props) {
 
@@ -15,30 +15,40 @@ export function Orders(props) {
 
     return (
         <div>
-            <h1 className='text-center mb-4'><i>Orders</i></h1>
-            <Table striped bordered hover variant="dark">
-                <thead>
-                    <tr>
-                        <th>Order label</th>
-                        <th className='text-center'>Active?</th>
-                        <th className='text-center'>Creation date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        orders ? (orders || []).map((r, i) => {
-                            return (
-                                <tr key={i} onClick={() => props.history.push(`orders/${r.id}`)}>
-                                    <td>{r.label}</td>
-                                    <td className='text-center'>{r.active === true ? 'yes' : 'no'}</td>
-                                    <td className='text-center'>{r.created.split('T')[0]}</td>
+            {
+                error ? <h2 className='text-center'>Error while loading.</h2> : (
+                    <div>
+                        <h1 className='text-center mb-4 restaurantName'><i>Orders</i></h1>
+                        <Table striped bordered hover variant="dark" size="sm">
+                            <thead className='thead'>
+                                <tr>
+                                    <th>Order label</th>
+                                    <th className='text-center'>Active?</th>
+                                    <th className='text-center'>Creation date</th>
+                                    <th className='text-center'>Show</th>
                                 </tr>
-                            )
-                        }) : ''
-                    }
+                            </thead>
+                            <tbody>
+                                {
+                                    orders ? (orders || []).map((r, i) => {
+                                        return (
+                                            <tr key={i}>
+                                                <td>{r.label}</td>
+                                                <td className='text-center'>{r.active === true ? 'yes' : 'no'}</td>
+                                                <td className='text-center'>{r.created.split('T')[0]}</td>
+                                                <td className='text-center'><IoIosEye size='2em' type='button' color='gray' onClick={() => props.history.push(`orders/${r.id}`)}></IoIosEye></td>
+                                            </tr>
+                                        )
+                                    }) : ''
+                                }
 
-                </tbody>
-            </Table>
+                            </tbody>
+                        </Table>
+                    </div>
+                )
+
+            }
+
         </div>
 
 

@@ -1,18 +1,14 @@
 import { useEffect, useState } from "react";
-import { Button, Row, Col, Table } from "react-bootstrap";
+import { Row, Col, Table } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { getRestaurants } from "../../../../api/restaurants";
 import '../../../../styles/restaurants.css'
-import { EditRestaurant } from '../../../components/Restaurants/EditRestaurant'
-import { IoEyeOutline, IoPencil } from "react-icons/io5";
+import { IoIosEye } from "react-icons/io";
 
 export function Restaurants() {
 
-    const [restaurants, setRestaurants] = useState([{'name': 'no', 'id': 'no', 'address': 'no', 'created':'no'}]);
-
-    const [ clicked, setClicked ] = useState(false);
-
-    const [ clickedID , setClickedID] = useState(null);
+    const [restaurants, setRestaurants] = useState([{ 'name': 'no', 'id': 'no', 'address': 'no', 'created': 'no' }]);
+    const [error, setError] = useState(false)
 
     const history = useHistory()
 
@@ -21,53 +17,49 @@ export function Restaurants() {
     }
 
     useEffect(() => {
-        getRestaurants().then(r => {
-            setRestaurants(r.data)
-        })
+        getRestaurants()
+            .then(r => setRestaurants(r.data))
+            .catch(() => setError(true))
     }, [])
-
-    const handleEditButton = (id) => {
-        if(clicked === false) {
-            setClicked(true)
-            setClickedID(id)
-        } else {
-            setClickedID(id)
-        }
-    }
 
     const list = Object.values(restaurants);
 
-    console.log(restaurants)
-
     return (
         <div>
-            <h1 className="text-center"><i>Restaurants</i></h1>
-            <Row className='mt-4'>
-                <Col>
-                    <Table striped bordered hover variant="dark">
-                        <thead>
-                            <tr>
-                                <th>NAME</th>
-                                <th className='text-center'>SHOW</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                list.map((r, i) => {
-                                    return (
-                                        <tr key={i}>
-                                            <th>{r.name}</th>
-                                            <th className='text-center'><IoEyeOutline size='2em' type='button' onClick={() => handleClick(r.id)}></IoEyeOutline></th>
+            {
+                error ? <h2 className='text-center'>Error while loading.</h2> : (
+                    <div>
+                        <h1 className="text-center restaurantName"><i>Restaurants</i></h1>
+                        <Row className='mt-4'>
+                            <Col>
+                                <Table striped bordered hover variant="dark" size="sm">
+                                    <thead className='thead'>
+                                        <tr>
+                                            <th>NAME</th>
+                                            <th className='text-center'>SHOW</th>
                                         </tr>
-                                    )
-                                })
-                            }
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            list.map((r, i) => {
+                                                return (
+                                                    <tr key={i}>
+                                                        <th>{r.name}</th>
+                                                        <th className='text-center'><IoIosEye size='2em' color='gray' type='button' onClick={() => handleClick(r.id)}></IoIosEye></th>
+                                                    </tr>
+                                                )
+                                            })
+                                        }
 
-                        </tbody>
-                    </Table>
-                </Col>
+                                    </tbody>
+                                </Table>
+                            </Col>
 
-            </Row>
+                        </Row>
+                    </div>
+                )
+            }
+
         </div>
 
     )

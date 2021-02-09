@@ -17,14 +17,14 @@ export function PollPreview(props) {
     const [poll, setPoll] = useState(null);
 
     useEffect(() => {
-
         getPoll(pollId).then((response) => {
             setPoll(response.data);
         });
-
-    }, []);
+    }, [pollId]);
     
     const notify = () => toast('Link is copied to the clipboard!', {type:'dark'})
+    
+    const currentURL = window.location.href; 
 
     return (
         <div>
@@ -38,8 +38,8 @@ export function PollPreview(props) {
                                 <h6 className='mb-3'>Send link below to your friends, and give them chance to vote for your next dinner</h6>
                                 <Card.Text
                                     style={{ marginBottom: '40px' }}>
-                                    {`http://localhost:3000/polls/${poll.id}`}
-                                    <CopyToClipboard text={`http://localhost:3000/polls/${poll.id}`}><IoIosCopy onClick={notify} className='copyButton' size='1.5em' type='button'></IoIosCopy></CopyToClipboard>
+                                    {currentURL}
+                                    <CopyToClipboard text={currentURL}><IoIosCopy onClick={notify} className='copyButton' size='1.5em' type='button'></IoIosCopy></CopyToClipboard>
                                     <ToastContainer/>
                                 </Card.Text>
 

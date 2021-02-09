@@ -4,11 +4,9 @@ import '../../../styles/footer.css'
 
 export function Footer() {
 
-    const FooterFn = () => (<div className="footer"> <p>This is some content in sticky footer</p> </div>);
-
     return (
         <StickyFooter
-            className='footerino'
+            className='footer0'
             bottomThreshold={10000}
             normalStyles={{
                 backgroundColor: "#999999",

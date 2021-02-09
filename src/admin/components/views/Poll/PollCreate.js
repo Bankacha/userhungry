@@ -5,8 +5,8 @@ import '../../../../styles/pollCreate.css'
 import { createPoll } from '../../../../api/polls'
 import { useHistory } from 'react-router-dom';
 import { IoIosArrowForward } from 'react-icons/io';
-import { IoIosClose, IoIosCreate } from "react-icons/io";
-import { GiForkKnifeSpoon } from "react-icons/gi";
+import { IoIosClose } from "react-icons/io";
+import { GiKnifeFork } from "react-icons/gi";
 
 export function PollsCreate(props) {
 
@@ -43,18 +43,13 @@ export function PollsCreate(props) {
                     console.log(error);
                 });
         }
-
     }
 
     // x button function
-
     const deleteFromWishlist = (r) => {
         setRestaurants([...restaurants, r]);
         setSelectedRestaurants([...selectedRestaurants.filter(rest => rest.id !== r.id)])
     }
-
-
-
 
     return (
         <Form>
@@ -106,7 +101,7 @@ export function PollsCreate(props) {
                     </Col>
                     <Col className='md-2 createCol'>
                         {
-                            selectedRestaurants.length ? <GiForkKnifeSpoon onClick={() => create()} type="button" variant="success" size='8em' className='createBtn' /> : ''
+                            selectedRestaurants.length ? <GiKnifeFork onClick={() => create()} type="button" size='8em' className='createBtn' /> : ''
                         }
                     </Col>
                 </Row>

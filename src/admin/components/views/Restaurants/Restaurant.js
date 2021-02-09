@@ -39,7 +39,7 @@ export function Restaurant() {
 
                         <EditRestaurant onEdited={() => loadRestaurant()} restaurant={restaurant}></EditRestaurant>
                         <hr />
-                        <Button onClick={handleClick} className='w-100 bg-dark mb-3'>MEALS</Button> 
+                        <Button onClick={handleClick} className='w-100 bg-dark mb-3'>{showMeals === false ? 'SHOW MEALS' : 'CLOSE MEALS'}</Button> 
                         {
                             showMeals === true ? (
                                 <Meals loadRestaurant={loadRestaurant} id={restaurant.id} meals={restaurant.meals}></Meals>

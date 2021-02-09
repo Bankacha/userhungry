@@ -6,6 +6,7 @@ import { getOrder } from "../../../api/orders"
 import { getRestaurant } from "../../../api/restaurants";
 import { MealItem } from "../orders/MealItem";
 import { AddMealModal } from '../orders/AddMealModal';
+import '../../../styles/cart.css'
 
 export function CreateOrder() {
 
@@ -31,12 +32,12 @@ export function CreateOrder() {
                     })
             })
 
-    }, [])
+    }, [orderId])
 
     const addMeal = (meal) => {
         setAddingMeal(meal);
     }
-    
+
     const addMealToCart = (cartItem) => { // -> {mealId, quantity, note?}
         setCartItems([...cartItems, cartItem]);
         setAddingMeal(null);
@@ -55,11 +56,10 @@ export function CreateOrder() {
                 show={addingMeal ? true : false}
             ></AddMealModal>
 
-            <h2 className='text-center my-5'><i>mAkE yOUr OrdEr</i></h2>
+            <h2 className='text-center my-4'><i>Make your order</i></h2>
             <Row>
-                <Col className={`p-4 ${cartItems} ? md-12 : md-7`}>
+                <Col className='md-7'>
                     {
-
                         restaurant ? (restaurant.meals || []).map((m, i) => {
                             return (
                                 <MealItem onAdd={addMeal} key={i} mealItem={m}></MealItem>
@@ -67,12 +67,9 @@ export function CreateOrder() {
                         }) : ''
                     }
                 </Col>
-                {
-                    cartItems.length ? (<Col md={5} className="p-4">
+                <Col md={5} className="p-3 cart">
                     <Cart clearCart={clearCart} orderId={orderId} meals={restaurant ? restaurant.meals : []} cartItems={cartItems}></Cart>
-                </Col>) : ''
-                }
-                
+                </Col>
             </Row>
         </div>
 

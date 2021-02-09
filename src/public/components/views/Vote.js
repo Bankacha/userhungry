@@ -19,7 +19,7 @@ export function Vote() {
         getPoll(pollId).then((res) => {
             setPoll(res.data);
         })
-    }, [])
+    }, [pollId])
 
     const vote = () => {
         if (!isSending) {

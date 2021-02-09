@@ -13,7 +13,7 @@ export function PublicLayout(props) {
     return (
         <div>
             <Navbar bg="light" variant="light">
-                <Navbar.Brand href="#home">UserHungry</Navbar.Brand>
+                <Navbar.Brand href="/" className='navLogo'><strong>UserHungry</strong></Navbar.Brand>
             </Navbar>
             <Container>
                 <Switch>
