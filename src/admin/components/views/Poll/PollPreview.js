@@ -24,7 +24,7 @@ export function PollPreview(props) {
     
     const notify = () => toast('Link is copied to the clipboard!', {type:'dark'})
     
-    const currentURL = window.location.href; 
+    const currentURL = window.location.href.split('/').filter(a=> a !== 'admin').join('/')
 
     return (
         <div>
@@ -32,13 +32,13 @@ export function PollPreview(props) {
                 poll ? (
                     <div className='mb-3'>
                         <Card className="bg-dark text-white">
-                            <Card.Header className='text-center' as="h5">{poll.label}</Card.Header>
+                            <Card.Header className='text-center' as="h5">{poll.label ? poll.label : 'This poll has no name'}</Card.Header>
                             <Card.Body>
                                 <Card.Title style={{ marginBottom: '40px' }}>Status: {poll.active === true ? 'active' : 'no longer active'}</Card.Title>
-                                <h6 className='mb-3'>Send link below to your friends, and give them chance to vote for your next dinner</h6>
+                                <h6 className='mb-4'>Send link below to your friends, and give them chance to vote for your next dinner</h6>
                                 <Card.Text
                                     style={{ marginBottom: '40px' }}>
-                                    {currentURL}
+                                    Click to copy your shareable link
                                     <CopyToClipboard text={currentURL}><IoIosCopy onClick={notify} className='copyButton' size='1.5em' type='button'></IoIosCopy></CopyToClipboard>
                                     <ToastContainer/>
                                 </Card.Text>

@@ -18,7 +18,7 @@ export function PollsListTable() {
                     <th>Poll name</th>
                     <th>Is active?</th>
                     <th>Created</th>
-                    <th>View</th>
+                    <th className='text-center'>View</th>
                     <th className='text-center'>Delete</th>
                 </tr>
             </thead>

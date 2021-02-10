@@ -7,7 +7,14 @@
 .createBtn {
   position: relative;
   right: -70px;
-  top: 20px;
+  top: 0px;
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 30px;
+  size: 7em;
+  width: 71%;
+  background-color: #999;
+  color: whitesmoke
 }
 
 .pollsCreateText {
@@ -15,6 +22,9 @@
   padding: 8px;
   position: relative;
   right: 16px;
+  margin-left: 10%;
+  border-radius: 10px;
+  background-color: #999;
 }
 
 .pollsCreateText2 {
@@ -22,5 +32,12 @@
   padding: 8px;
   position: relative;
   right: 16px;
-  top: 2px
+  top: 2px;
+  background-color: #999;
+  border-radius: 10px;
+}
+
+.pollLabel {
+  width: 100%;
+  margin-left: -0.7%;
 }

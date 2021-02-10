@@ -1,5 +1,5 @@
 import { ListGroup } from 'react-bootstrap';
-
+import '../../../styles/restaurantListItem.css'
 
 export function RestaurantsList(props) {
 
@@ -24,7 +24,7 @@ export function RestaurantsList(props) {
                     props.restaurants.map((r, i) => {
                         return (
 
-                            <ListGroup.Item key={i}>{r.name} - {countVotes(r.id)} votes</ListGroup.Item>
+                            <ListGroup.Item className='restaurantListItem' key={i}>{r.name} - {countVotes(r.id)} votes</ListGroup.Item>
                         )
                     })
                 }

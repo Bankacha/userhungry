@@ -4,6 +4,7 @@ import { getRestaurant } from "../../../../api/restaurants";
 import { EditRestaurant } from "../../Restaurants/EditRestaurant";
 import { Meals } from "../../../components/Restaurants/Meals";
 import { Button } from "react-bootstrap";
+import { SecondaryTitle } from '../../Shared/SecondaryTitle';
 
 export function Restaurant() {
     const { restId } = useParams();
@@ -35,7 +36,7 @@ export function Restaurant() {
             {
                 restaurant && !error ? (
                     <div>
-                        <h3 className="mb-5 text-center restaurantName">Restaurant: <strong>{restaurant.name}</strong></h3>
+                        <SecondaryTitle props={`Restaurant: ${restaurant.name}`}></SecondaryTitle>
 
                         <EditRestaurant onEdited={() => loadRestaurant()} restaurant={restaurant}></EditRestaurant>
                         <hr />

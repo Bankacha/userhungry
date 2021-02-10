@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Form, Row, Col } from 'react-bootstrap';
+import { Form, Row, Col, Container } from 'react-bootstrap';
 import { getRestaurants } from '../../../../api/restaurants'
 import '../../../../styles/pollCreate.css'
 import { createPoll } from '../../../../api/polls'
@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { IoIosArrowForward } from 'react-icons/io';
 import { IoIosClose } from "react-icons/io";
 import { GiKnifeFork } from "react-icons/gi";
+import "../../../../styles/wishList.css"
 
 export function PollsCreate(props) {
 
@@ -52,40 +53,47 @@ export function PollsCreate(props) {
     }
 
     return (
-        <Form>
-            <Form.Group controlId="exampleForm.ControlInput1">
-                <Form.Label>Enter Poll Label</Form.Label>
-                <Form.Control onChange={e => setLabel(e.target.value)} type="string" placeholder="Poll Name" />
-            </Form.Group>
-            <Form.Group controlId="exampleForm.ControlSelect1">
-                <Row>
-                    <Col className='offset-1 md-3'>
-                        <Form.Label className='mt-3 mb-5 pollsCreateText'><strong>Click on restaurant to make a WishList &gt;</strong></Form.Label>
+        <Container>
+            <Form>
+                <Form.Group className='pollLabel' controlId="exampleForm.ControlInput1">
+                    <Form.Label>Enter Poll Label</Form.Label>
+                    <Form.Control className='pollLabel' onChange={e => setLabel(e.target.value)} type="string" placeholder="Poll Label" />
+                </Form.Group>
 
-                    </Col>
-                    <Col className=' md-3'>
-                        <Form.Label className='mt-3 mb-5 pollsCreateText2'><strong>Wishlist</strong></Form.Label>
-                    </Col>
-                </Row>
+            </Form >
+            <Row>
+                <Col className='md-3'>
+                    <Form.Label className='mt-3 mb-5 pollsCreateText'><strong>Click
+                             to make a WishList &gt;</strong></Form.Label>
 
-                <Row>
-                    <Col className='offset-1 md-3'>
-                        {
-                            restaurants.map((r, i) => {
-                                return (
-                                    <Row key={i} onClick={() => restSelect(r)} className="justify-content-between shadow-sm bg-light my-4 p-2 rounded">
-                                        <Col md={10} className='mb-1 mt-1' >{r.name}</Col>
-                                        <Col md={2} className='p-0 text-right'>
-                                            <IoIosArrowForward />
-                                        </Col>
-                                    </Row>
-                                )
-                            })
-                        }
-                    </Col>
-                    <Col className='offset-1 md-3'>
-                        {
-                            selectedRestaurants.map((r, i) => {
+                </Col>
+                <Col className='md-3'>
+                    <Form.Label className='mt-3 mb-5 pollsCreateText2'><strong>Wishlist</strong></Form.Label>
+                </Col>
+            </Row>
+            <Row className="wishList">
+                <Col className='md-3 wishListItems'>
+                    {
+                        restaurants.map((r, i) => {
+                            return (
+                                <Row key={i} onClick={() => restSelect(r)} className="justify-content-between shadow-sm bg-light my-4 p-2 rounded">
+                                    <Col md={10} className='mb-1 mt-1' >{r.name}</Col>
+                                    <Col md={2} className='p-0 text-right'>
+                                        <IoIosArrowForward />
+                                    </Col>
+                                </Row>
+                            )
+                        })
+                    }
+                </Col>
+                <Col className='offset-1 md-3 wishListItems'>
+                    {
+                        !selectedRestaurants.length ? (
+                            <Row className="justify-content-between shadow-sm bg-light my-4 p-2 rounded">
+                                <Col>
+                                    Your wishlist is currently empty
+                                </Col>
+                            </Row>) : selectedRestaurants.map((r, i) => {
                                 return (
                                     <Row onMouseLeave={() => setHovered(-1)} onMouseOver={() => setHovered(i)} key={i} className="justify-content-between shadow-sm bg-light my-4 p-2 rounded">
                                         <Col onClick={() => deleteFromWishlist(r)}>
@@ -97,16 +105,16 @@ export function PollsCreate(props) {
                                     </Row>
                                 )
                             })
-                        }
-                    </Col>
-                    <Col className='md-2 createCol'>
-                        {
-                            selectedRestaurants.length ? <GiKnifeFork onClick={() => create()} type="button" size='8em' className='createBtn' /> : ''
-                        }
-                    </Col>
-                </Row>
+                    }
+                </Col>
+                <Col className='md-2 createCol'>
+                    {
+                        selectedRestaurants.length ? <GiKnifeFork onClick={() => create()} type="button" size='9em' className='createBtn' /> : ''
+                    }
+                </Col>
+            </Row>
 
-            </Form.Group>
-        </Form >
+        </Container>
+
     )
 }

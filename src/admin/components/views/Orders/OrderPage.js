@@ -5,7 +5,8 @@ import { getMeals } from "../../../../api/meals";
 import { SingleOrder } from "../../Order/SingleOrder";
 import { Table } from "react-bootstrap";
 import { ExelDownloadButton } from "../../Order/ExelDownloadButton";
-
+import { Title } from '../../Shared/Title'
+import { SecondaryTitle } from "../../Shared/SecondaryTitle";
 
 export function OrderPage() {
 
@@ -82,7 +83,7 @@ export function OrderPage() {
             {
                 orderItems.length ? (
                     <div>
-                        <h1 className='mb-4 text-center restaurantName'><i>Ordered saldo is - {calculate()} $</i></h1>
+                        <SecondaryTitle props={`Ordered total = ${calculate()} $`}></SecondaryTitle>
                         <ExelDownloadButton list={newList}></ExelDownloadButton>
 
                         <Table className='mt-3' striped bordered hover variant="dark" size="sm">
