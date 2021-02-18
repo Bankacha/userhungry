@@ -37,8 +37,8 @@ export function Restaurants() {
                                     <thead className='thead'>
                                         <tr>
                                             <th></th>
-                                            <th>NAME</th>
-                                            <th className='text-center'>SHOW</th>
+                                            <th>Name</th>
+                                            <th className='text-center'>Show</th>
                                         </tr>
                                     </thead>
                                     <tbody>

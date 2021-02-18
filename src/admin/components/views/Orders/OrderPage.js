@@ -3,10 +3,11 @@ import { useParams } from "react-router";
 import { getOrderItems, getOrder } from "../../../../api/orders";
 import { getMeals } from "../../../../api/meals";
 import { SingleOrder } from "../../Order/SingleOrder";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import { ExelDownloadButton } from "../../Order/ExelDownloadButton";
 import { Title } from '../../Shared/Title'
 import { SecondaryTitle } from "../../Shared/SecondaryTitle";
+import { Link } from "react-router-dom";
 
 export function OrderPage() {
 
@@ -108,7 +109,10 @@ export function OrderPage() {
                             </tbody>
                         </Table>
                     </div>
-                ) : <h2 className='mt-5 text-center'>Sorry, but there are no orders for this one</h2>
+                ) : (<div className='text-center'>
+                    <h2 className='mt-5 text-center'>Sorry, but there are no orders for this one</h2>
+                    <Link to='../orders'><Button className='mt-5 w-50 bg-secondary'>Go back to Orders</Button></Link>
+                    </div>)
             }
         </div>
     )

@@ -22,7 +22,7 @@ export function Results() {
 
     return (
         <div>
-            <h2 className='text-center'>You can see current results below</h2>
+            <h2 className='text-center secondaryTitle'>You can see current results below</h2>
             <RestaurantsList votes={votes} restaurants={restaurants}></RestaurantsList>
         </div>
     )

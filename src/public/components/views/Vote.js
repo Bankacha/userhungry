@@ -47,7 +47,7 @@ export function Vote() {
 
     return (
         poll ? (
-            <div>
+            <div className='my-3'>
                 <Card className="bg-dark text-white">
                     <Card.Header className='text-center' as="h5"></Card.Header>
                     <Card.Body>
@@ -63,7 +63,7 @@ export function Vote() {
                                             onClick={() => setSelectedId(r.id)}
                                             key={i}
                                             style={{ cursor: 'pointer' }}
-                                            className={`p-4 text-dark my-3 rounded ${selectedId === r.id ? 'bg-info' : 'bg-light'}`}>
+                                            className={`p-4 text-dark my-3 rounded ${selectedId === r.id ? 'bg-success' : 'bg-light'}`}>
                                             {r.name}
                                         </li>
                                     )

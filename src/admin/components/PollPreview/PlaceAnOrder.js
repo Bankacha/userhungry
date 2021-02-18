@@ -11,23 +11,26 @@ import { useHistory } from 'react-router';
 export function PlaceOrder(props) {
 
     const [name, setName] = useState('')
-    
+
     const history = useHistory();
-    
+
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = data => {
 
-        postOrder(winner.id, data.name).then(r => console.log(r.data));
+        if (props.pollStatus === false) {
+            postOrder(winner.id, data.name).then(r => console.log(r.data));
 
-        notify()
+            notifyValid()
+            reset()
+            setTimeout(() => history.push("../orders"), 2000);
 
-        setTimeout(()=>history.push("../orders"), 2000);
-        
- 
-        reset()
+        } else {
+            notifyError()
+        }
     };
 
-    const notify = () => toast('Order created successfully!', { type: 'dark' })
+    const notifyValid = () => toast('Order created successfully!', { type: 'dark' })
+    const notifyError = () => toast('Poll is still active!', { type: 'dark' })
 
 
 
@@ -48,20 +51,20 @@ export function PlaceOrder(props) {
     const winner = winnerRestaurant();
 
     return (
-                winner ? (
-                    <Card className="bg-light text-dark p-4">
-                        <Form onSubmit={handleSubmit(onSubmit)}>
-                            <Form.Group className='mt-4 text-center'>
-                                <Form.Label ref={register} value={winner.name} name='restaurant'>Chosen Restaurant is <strong>{winner.name}</strong></Form.Label>
-                                <Form.Control onChange={e => setName(e.target.value)} ref={register} name="name" type="string" placeholder="Order Label Name" />
-                            </Form.Group>
-                            {
-                                name ? (<Button type="submit" variant="secondary" style={{ width: '100%' }}><IoIosCheckmark size='2em' /></Button>
-                                ) : ''
-                            }
-                            <ToastContainer />
-                        </Form>
-                    </Card>
-                ) : <h2>There is no winner.</h2>    
+        winner ? (
+            <Card className="bg-light text-dark p-4">
+                <Form onSubmit={handleSubmit(onSubmit)}>
+                    <Form.Group className='mt-4 text-center'>
+                        <Form.Label ref={register} value={winner.name} name='restaurant'>Chosen Restaurant is <strong>{winner.name}</strong></Form.Label>
+                        <Form.Control onChange={e => setName(e.target.value)} ref={register} name="name" type="string" placeholder="Order Label" />
+                    </Form.Group>
+                    {
+                        name ? (<Button type="submit" variant="secondary" style={{ width: '100%' }}><IoIosCheckmark size='2em' /></Button>
+                        ) : ''
+                    }
+                    <ToastContainer />
+                </Form>
+            </Card>
+        ) : <h2>There is no winner.</h2>
     )
 }

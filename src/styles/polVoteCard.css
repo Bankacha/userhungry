@@ -3,14 +3,8 @@
     width: 80%;
     position: relative;
     text-align: center;
-    padding: 2%;
+    /* padding: 2%; */
     margin: auto;
     background-color:whitesmoke
 }
 
-.pollVoteHeader {
-    background-color: #6c757d;
-    width: 105%;
-    margin: auto;
-    margin-left: -2.5%;
-}
