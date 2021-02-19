@@ -11,10 +11,6 @@ export function EditRestaurant(props) {
 
     const history = useHistory();
 
-    const goBack = () => {
-        history.push("./");
-    }
-
     const edit = () => {
         const body = { ...props.restaurant }
 
@@ -22,10 +18,11 @@ export function EditRestaurant(props) {
         body.address = address ? address : body.address;
 
         updateRestaurant(props.restaurant.id, body)
-            .then(r => props.onEdited())
+            .then(r => {
+                props.onEdited();
+                history.push("./");
+            })
             .catch(() => setError(true))
-
-        goBack()
     }
 
     return (

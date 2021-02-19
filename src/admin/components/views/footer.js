@@ -6,7 +6,7 @@ export function Footer() {
 
     return (
         <StickyFooter
-            className='footer0'
+            className='footer'
             bottomThreshold={10000}
             normalStyles={{
                 backgroundColor: "#999999",

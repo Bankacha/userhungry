@@ -11,6 +11,7 @@ import { Orders } from "../components/views/Orders/Orders"
 import '../../styles/container.css';
 import { OrderPage } from "../components/views/Orders/OrderPage";
 import '../../styles/nav.css'
+import { LogIn } from "../components/views/LogIn";
 
 export function AdminLayout(props) {
 
@@ -41,10 +42,13 @@ export function AdminLayout(props) {
                     <Route path={`${path}/orders`} component={Orders}></Route>
 
                     <Route exact path={`${path}`} component={AdminDashboard}></Route>
+
+                    <Route path={`${path}/login`} component={LogIn}></Route>
+
                 </Switch>
                 
             </Container>
-            <Footer className='footerino'></Footer>
+            <Footer></Footer>
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Row, Col, Table } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 import { getRestaurants } from "../../../../api/restaurants";
 import { IoIosEye } from "react-icons/io";
 import { Title } from "../../Shared/Title";
@@ -62,8 +62,6 @@ export function Restaurants() {
                     </div>
                 )
             }
-
         </div>
-
     )
 }
