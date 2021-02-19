@@ -34,7 +34,7 @@ export function PollPreview(props) {
                         <Card className="bg-dark text-white">
                             <Card.Header className='text-center' as="h5">{poll.label ? poll.label : 'This poll has no name'}</Card.Header>
                             <Card.Body>
-                                <Card.Title style={{ marginBottom: '40px' }}>Poll status: {poll.active === true ? 'still active' : 'voting is finisged'}</Card.Title>
+                                <Card.Title style={{ marginBottom: '40px' }}>Poll status: {poll.active === true ? 'still active' : 'voting is finished'}</Card.Title>
                                 <h6 className='mb-4'>Send link below to your friends, and give them chance to vote for your next dinner</h6>
                                 <Card.Text
                                     style={{ marginBottom: '40px' }}>
