@@ -4,14 +4,15 @@ import { AdminLayout } from './admin/layout/AdminLayout';
 import { PublicLayout } from './public/layout/PublicLayout';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { PrivateRoute } from './auth/PrivateRoute';
 
 
 function App() {
 
   return (
-    <BrowserRouter >
+    <BrowserRouter>
       <Switch>
-        <Route path="/admin" component={AdminLayout}></Route>
+        <PrivateRoute path="/admin" component={AdminLayout}></PrivateRoute>
         <Route path="/" component={PublicLayout}></Route>
       </Switch>
     </BrowserRouter>

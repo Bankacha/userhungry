@@ -11,7 +11,7 @@ import { Orders } from "../components/views/Orders/Orders"
 import '../../styles/container.css';
 import { OrderPage } from "../components/views/Orders/OrderPage";
 import '../../styles/nav.css'
-import { LogIn } from "../components/views/LogIn";
+import { PrivateRoute } from "../../auth/PrivateRoute";
 
 export function AdminLayout(props) {
 
@@ -30,23 +30,19 @@ export function AdminLayout(props) {
             <Container className='pt-5 container'>
                 <Switch>
                     {/* Be careful with ordering the Route components: */}
-                    <Route path={`${path}/polls/create`} component={PollsCreate}></Route>
-                    <Route path={`${path}/polls/:pollId`} component={PollPreview}></Route>
-                    <Route path={`${path}/polls`} component={PollsList}></Route>
+                    <PrivateRoute path={`${path}/polls/create`} component={PollsCreate} />
+                    <PrivateRoute path={`${path}/polls/:pollId`} component={PollPreview} />
+                    <PrivateRoute path={`${path}/polls`} component={PollsList} />
 
-                    {/* <Route path={`${path}/restaurants/:restID/meals`} component={Meals}></Route> */}
-                    <Route path={`${path}/restaurants/:restId`} component={Restaurant}></Route>
-                    <Route path={`${path}/restaurants`} component={Restaurants}></Route>
+                    <PrivateRoute path={`${path}/restaurants/:restId`} component={Restaurant} />
+                    <PrivateRoute path={`${path}/restaurants`} component={Restaurants} />
 
-                    <Route path={`${path}/orders/:orderId`} component={OrderPage}></Route>
-                    <Route path={`${path}/orders`} component={Orders}></Route>
+                    <PrivateRoute path={`${path}/orders/:orderId`} component={OrderPage} />
+                    <PrivateRoute path={`${path}/orders`} component={Orders} />
 
-                    <Route exact path={`${path}`} component={AdminDashboard}></Route>
-
-                    <Route path={`${path}/login`} component={LogIn}></Route>
-
+                    <PrivateRoute exact path={`${path}`} component={AdminDashboard} />
                 </Switch>
-                
+
             </Container>
             <Footer></Footer>
         </div>
